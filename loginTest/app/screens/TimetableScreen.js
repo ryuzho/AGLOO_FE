@@ -30,6 +30,8 @@ export default class TimetableScreen extends Component {
     let i = 0
     let j = 0
     this.setState({userSub:this.state.userSub})
+    this.setState({day:this.state.day})
+    this.setState({class:this.state.class})
     if(this.state.userSub !== ""){
       switch(this.state.day){
         case 'mon':
