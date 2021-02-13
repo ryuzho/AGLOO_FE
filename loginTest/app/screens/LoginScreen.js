@@ -14,46 +14,48 @@ export default class login extends Component {
 	}
 	
 	login = () =>{
-		const {userId,userPassword} = this.state;
+    this.props.navigation.navigate("main");
+		// const {userId,userPassword} = this.state;
 	
-		if(userId==""){
+		// if(userId==""){
 			
-		  this.setState({id:'Please enter ID'})
+		//   this.setState({id:'Please enter ID'})
 			
-		}
-		else if(userPassword==""){
-		this.setState({id:'Please enter password'})
-		}
-		else{
-		fetch('http://115.85.183.157:3000/login',{
-			method:'POST',
-			headers:{
-				 'Accept' : 'application/json',
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({
-				id : this.state.userId,
-				pw : this.state.userPassword
-			}),
-		})
-		.then((response) => response.json())
-		 .then((response)=>{
-			 if(response.success){
-				 this.props.navigation.navigate("main");
-			 }else{
-				alert(response.msg);
-			 }
-		 })
-		 .catch((error)=>{
-		 console.error(error);
-		 });
-		}
+		// }
+		// else if(userPassword==""){
+		// this.setState({id:'Please enter password'})
+		// }
+		// else{
+		// fetch('http://115.85.183.157:3000/login',{
+		// 	method:'POST',
+		// 	headers:{
+		// 		 'Accept' : 'application/json',
+		// 		'Content-Type': 'application/json'
+		// 	},
+		// 	body: JSON.stringify({
+		// 		id : this.state.userId,
+		// 		pw : this.state.userPassword
+		// 	}),
+		// })
+		// .then((response) => response.json())
+		//  .then((response)=>{
+		// 	 if(response.success){
+		// 		 this.props.navigation.navigate("main");
+		// 	 }else{
+		// 		alert(response.msg);
+		// 	 }
+		//  })
+		//  .catch((error)=>{
+		//  console.error(error);
+		//  });
+		// }
 		
 		
 		Keyboard.dismiss();
 	}
   
   render(){
+
     return (
       
       <KeyboardAvoidingView style = {styles.container} behavior = "padding">
@@ -72,6 +74,12 @@ export default class login extends Component {
             onPress = {this.login}
             >
             <Text style = {styles.buttonText}>Login</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style ={styles.registerbutton}
+            onPress = {()=>this.props.navigation.navigate("register")}
+            >
+            <Text style = {styles.registerbuttonText}>Register Now !</Text>
           </TouchableOpacity>
           </View>
           
@@ -128,5 +136,19 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize : 20,
     color : "white"
-  }
+  },
+  registerbutton:{
+    borderWidth: 2,
+    borderRadius: 6,
+    justifyContent: "center",
+    alignItems: "center",
+    width: '70%',
+    height: 50,
+    marginTop: 8
+  },
+  registerbuttonText: {
+    fontSize : 15,
+    color : "#004ba0"
+  },
+
 });
