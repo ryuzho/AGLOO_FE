@@ -383,36 +383,39 @@ export default class TimetableScreen extends Component {
   } 
     
   setModalVisible = (visible) => {
-    this.setState({ modalVisible: visible });
+    this.setState({ modalVisible: visible }),
+    this.setState({userSub : ""})
   }
+
   save = () =>{
-    fetch('http://115.85.183.157:3000/login',{
-			method:'POST',
-			headers:{
-				 'Accept' : 'application/json',
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({
-        a0 : this.state.tableData[0][0], a1 : this.state.tableData[0][1], a2 : this.state.tableData[0][2], a3 : this.state.tableData[0][3], a4 : this.state.tableData[0][4],
-        b0 : this.state.tableData[1][0], b1 : this.state.tableData[1][1], b2 : this.state.tableData[1][2], b3 : this.state.tableData[1][3], b4 : this.state.tableData[1][4],
-        c0 : this.state.tableData[2][0], c1 : this.state.tableData[2][1], c2 : this.state.tableData[2][2], c3 : this.state.tableData[2][3], c4 : this.state.tableData[2][4],
-        d0 : this.state.tableData[3][0], d1 : this.state.tableData[3][1], d2 : this.state.tableData[3][2], d3 : this.state.tableData[3][3], d4 : this.state.tableData[3][4],
-        e0 : this.state.tableData[4][0], e1 : this.state.tableData[4][1], e2 : this.state.tableData[4][2], e3 : this.state.tableData[4][3], e4 : this.state.tableData[4][4],
-        f0 : this.state.tableData[5][0], f1 : this.state.tableData[5][1], f2 : this.state.tableData[5][2], f3 : this.state.tableData[5][3], f4 : this.state.tableData[5][4],
-        g0 : this.state.tableData[6][0], g1 : this.state.tableData[6][1], g2 : this.state.tableData[6][2], g3 : this.state.tableData[6][3], g4 : this.state.tableData[6][4]
-			}),
-		})
-		.then((response) => response.json())
-		 .then((response)=>{
-			 if(response.success){
-				 this.props.navigation.navigate("main");
-			 }else{
-				alert(response.msg);
-			 }
-		 })
-		 .catch((error)=>{
-		 console.error(error);
-		 });
+    Alert.alert("저장되었습니다.")
+    // fetch('http://115.85.183.157:3000/time',{
+		// 	method:'POST',
+		// 	headers:{
+		// 		 'Accept' : 'application/json',
+		// 		'Content-Type': 'application/json'
+		// 	},
+		// 	body: JSON.stringify({
+    //     a0 : this.state.tableData[0][0], a1 : this.state.tableData[0][1], a2 : this.state.tableData[0][2], a3 : this.state.tableData[0][3], a4 : this.state.tableData[0][4],
+    //     b0 : this.state.tableData[1][0], b1 : this.state.tableData[1][1], b2 : this.state.tableData[1][2], b3 : this.state.tableData[1][3], b4 : this.state.tableData[1][4],
+    //     c0 : this.state.tableData[2][0], c1 : this.state.tableData[2][1], c2 : this.state.tableData[2][2], c3 : this.state.tableData[2][3], c4 : this.state.tableData[2][4],
+    //     d0 : this.state.tableData[3][0], d1 : this.state.tableData[3][1], d2 : this.state.tableData[3][2], d3 : this.state.tableData[3][3], d4 : this.state.tableData[3][4],
+    //     e0 : this.state.tableData[4][0], e1 : this.state.tableData[4][1], e2 : this.state.tableData[4][2], e3 : this.state.tableData[4][3], e4 : this.state.tableData[4][4],
+    //     f0 : this.state.tableData[5][0], f1 : this.state.tableData[5][1], f2 : this.state.tableData[5][2], f3 : this.state.tableData[5][3], f4 : this.state.tableData[5][4],
+    //     g0 : this.state.tableData[6][0], g1 : this.state.tableData[6][1], g2 : this.state.tableData[6][2], g3 : this.state.tableData[6][3], g4 : this.state.tableData[6][4]
+		// 	}),
+		// })
+		// .then((response) => response.json())
+		//  .then((response)=>{
+		// 	 if(response.success){
+    //     Alert.alert("저장되었습니다.")
+		// 	 }else{
+		// 		alert(response.msg);
+		// 	 }
+		//  })
+		//  .catch((error)=>{
+		//  console.error(error);
+		//  });
   }
 
 
