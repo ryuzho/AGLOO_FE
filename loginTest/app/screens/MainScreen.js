@@ -1,14 +1,68 @@
-import React from "react";
-import { View, Text, StyleSheet, Button} from "react-native";
+import { View, Text, StyleSheet, Button, Alert} from "react-native";
+import React, { Component, useState} from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from './HomeScreen';
 import TimetableScreen from './TimetableScreen';
+import LoginScreen from './LoginScreen';
 import SettingsScreen from './SettingsScreen';
+import AsyncStorage from '@react-native-community/async-storage';
+
+
 
 const Tab = createBottomTabNavigator();
 
-const MainScreen = () => {
+
+export default class MainScreen extends Component{
+
+  constructor(props) {
+    
+    super(props);
+    this.state = {
+      my_token : '',
+      user_id : ''
+    };
+    
+}
+
+
+ async componentDidMount() {
+  await AsyncStorage.getItem('user_token').then((value) => {
+    if(value){
+        this.setState({my_token:JSON.parse(value).token})
+    }
+  });
+
+    fetch('http://115.85.183.157:3000/auth',{
+			method:'POST',
+			headers:{
+				 'Accept' : 'application/json',
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				token :this.state.my_token
+			}),
+		})
+		.then((response) => response.json())
+		 .then((response)=>{
+			 if(response.success){
+         this.setState({user_id : response.id})
+        Alert.alert(`안녕하세요 ! ${response.id}님`)
+			 }else{
+        this.props.navigation.navigate("Login");
+			 }
+		 })
+		 .catch((error)=>{
+		 //console.error(error);
+		 });
+  }
+
+
+    
+    
+
+  render(){
+
     return (
         <Tab.Navigator
         screenOptions={({ route }) => ({
@@ -40,4 +94,4 @@ const MainScreen = () => {
     );
   }
 
-export default MainScreen;
+}

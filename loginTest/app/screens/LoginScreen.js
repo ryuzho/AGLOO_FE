@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { NavigationContainer } from '@react-navigation/native'
 import { StyleSheet, Text, TextInput, View, TouchableOpacity, KeyboardAvoidingView, Keyboard } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 
 
 export default class login extends Component {
@@ -12,43 +13,48 @@ export default class login extends Component {
 			userPassword:''
 		}
 	}
+  
+  state = {
+    _isLogin: false
+  };
 	
 	login = () =>{
-    this.props.navigation.navigate("main");
-		// const {userId,userPassword} = this.state;
+    // this.props.navigation.navigate("main");
+		const {userId,userPassword} = this.state;
 	
-		// if(userId==""){
+		if(userId==""){
 			
-		//   this.setState({id:'Please enter ID'})
+		  this.setState({id:'Please enter ID'})
 			
-		// }
-		// else if(userPassword==""){
-		// this.setState({id:'Please enter password'})
-		// }
-		// else{
-		// fetch('http://115.85.183.157:3000/login',{
-		// 	method:'POST',
-		// 	headers:{
-		// 		 'Accept' : 'application/json',
-		// 		'Content-Type': 'application/json'
-		// 	},
-		// 	body: JSON.stringify({
-		// 		id : this.state.userId,
-		// 		pw : this.state.userPassword
-		// 	}),
-		// })
-		// .then((response) => response.json())
-		//  .then((response)=>{
-		// 	 if(response.success){
-		// 		 this.props.navigation.navigate("main");
-		// 	 }else{
-		// 		alert(response.msg);
-		// 	 }
-		//  })
-		//  .catch((error)=>{
-		//  console.error(error);
-		//  });
-		// }
+		}
+		else if(userPassword==""){
+		this.setState({id:'Please enter password'})
+		}
+		else{
+		fetch('http://115.85.183.157:3000/login',{
+			method:'POST',
+			headers:{
+				 'Accept' : 'application/json',
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				id : this.state.userId,
+				pw : this.state.userPassword
+			}),
+		})
+		.then((response) => response.json())
+		 .then((response)=>{
+			 if(response.success){
+         AsyncStorage.setItem('user_token',JSON.stringify({token : response.token}))
+				 this.props.navigation.navigate("main");
+			 }else{
+				alert(response.msg);
+			 }
+		 })
+		 .catch((error)=>{
+		  console.error(error);
+		 });
+		}
 		
 		
 		Keyboard.dismiss();
@@ -66,7 +72,7 @@ export default class login extends Component {
           </View>
           <View style = {styles.inputForm}>
           <TextInput style = {styles.input} placeholder = "ID" onChangeText={userId => this.setState({userId})} /> 
-          <TextInput style = {styles.input} placeholder = "PASSWORD" onChangeText={userPassword => this.setState({userPassword})} /> 
+          <TextInput secureTextEntry={false} style = {styles.input} placeholder = "PASSWORD" onChangeText={userPassword => this.setState({userPassword})} /> 
             </View>
           <View style = {styles.buttonArea}>
           <TouchableOpacity

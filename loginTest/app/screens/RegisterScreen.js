@@ -71,8 +71,8 @@ export default class register extends Component {
           <View style = {styles.inputForm}>
           <TextInput style = {styles.input} placeholder = "아이디" onChangeText={userId => this.setState({userId})} /> 
           <TextInput style = {styles.input} placeholder = "이름" onChangeText={userName => this.setState({userName})} />
-          <TextInput style = {styles.input} placeholder = "비밀번호" onChangeText={userPassword => this.setState({userPassword})} />
-          <TextInput style = {styles.input} placeholder = "비밀번호 확인" onChangeText={userPasswordConfirm => this.setState({userPasswordConfirm})} /> 
+          <TextInput secureTextEntry={false} style = {styles.input} placeholder = "비밀번호" onChangeText={userPassword => this.setState({userPassword})} />
+          <TextInput secureTextEntry={false} style = {styles.input} placeholder = "비밀번호 확인" onChangeText={userPasswordConfirm => this.setState({userPasswordConfirm})} /> 
             </View>
           <View style = {styles.buttonArea}>
           <TouchableOpacity

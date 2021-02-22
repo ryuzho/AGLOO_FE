@@ -8,6 +8,7 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@react-native-community/async-storage": "^1.12.1",
     "@react-native-community/masked-view": "0.1.10",
     "@react-native-picker/picker": "^1.9.10",
     "@react-navigation/bottom-tabs": "^5.11.7",
@@ -26,7 +27,8 @@
     "react-native-table-component": "^1.2.1",
     "react-native-timetable": "^1.0.4",
     "react-native-web": "~0.13.12",
-    "react-navigation": "^4.4.3"
+    "react-navigation": "^4.4.3",
+    "rn-checkbox-list": "^0.4.0"
   },
   "devDependencies": {
     "@babel/core": "~7.9.0"
