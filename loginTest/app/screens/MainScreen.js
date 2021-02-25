@@ -20,7 +20,7 @@ export default class MainScreen extends Component{
     super(props);
     this.state = {
       my_token : '',
-      user_id : ''
+      userID : ''
     };
     
 }
@@ -46,8 +46,7 @@ export default class MainScreen extends Component{
 		.then((response) => response.json())
 		 .then((response)=>{
 			 if(response.success){
-         this.setState({user_id : response.id})
-        Alert.alert(`안녕하세요 ! ${response.id}님`)
+        this.setState({userID:response.id})
 			 }else{
         this.props.navigation.navigate("Login");
 			 }
@@ -86,11 +85,14 @@ export default class MainScreen extends Component{
           activeTintColor: 'blue',
           inactiveTintColor: 'gray',
         }}
+        
       >
-        <Tab.Screen name="Home" component={HomeScreen} />
-        <Tab.Screen name="Timetable" component={TimetableScreen} />
-        <Tab.Screen name="Settings" component={SettingsScreen} />
+        
+        <Tab.Screen name="Home" children = {({navigation})=><HomeScreen userID = {this.state.userID}/>}/>
+        <Tab.Screen name="Timetable" children = {({navigation})=><TimetableScreen userID = {this.state.userID}/>}/>
+        <Tab.Screen name="Settings" children = {({navigation})=><SettingsScreen userID = {this.state.userID}/>}/>
       </Tab.Navigator>
+      
     );
   }
 

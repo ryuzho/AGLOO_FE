@@ -11,7 +11,6 @@ export default class TimetableScreen extends Component {
     super(props);
     this.state = {
       isTableLoading : false,
-      userID : '',
       tableHead: ['', 'Mon', 'Tue', 'Wed','Thu','Fri'],
       tableTitle: ['A', 'B', 'C', 'D', 'E', 'F', 'G'],
       tableData: [
@@ -31,35 +30,8 @@ export default class TimetableScreen extends Component {
     
     }
   }
-  async componentDidMount() {
-    await AsyncStorage.getItem('user_token').then((value) => {
-      if(value){
-          this.setState({my_token:JSON.parse(value).token})
-      }
-    });
   
-      await fetch('http://115.85.183.157:3000/auth',{
-        method:'POST',
-        headers:{
-           'Accept' : 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          token :this.state.my_token
-        }),
-      })
-      .then((response) => response.json())
-       .then((response)=>{
-         if(response.success){
-           this.setState({userID : response.id})
-         }else{
-          this.props.navigation.navigate("Login");
-         }
-       })
-       .catch((error)=>{
-       //console.error(error);
-       });
-
+  componentDidMount() {
     var user_tableData = [
       [null,null,null,null,null],
       [null,null,null,null,null],
@@ -69,7 +41,7 @@ export default class TimetableScreen extends Component {
       [null,null,null,null,null],
       [null,null,null,null,null]
     ]
-    fetch(`http://115.85.183.157:3000/time?id=${this.state.userID}`,{
+    fetch(`http://115.85.183.157:3000/time?id=${this.props.userID}`,{
       method:'GET',
       headers:{
           'Accept' : 'application/json',
@@ -470,7 +442,7 @@ export default class TimetableScreen extends Component {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        id : this.state.userID,
+        id : this.props.userID,
         a0 : this.state.tableData[0][0], a1 : this.state.tableData[0][1], a2 : this.state.tableData[0][2], a3 : this.state.tableData[0][3], a4 : this.state.tableData[0][4],
         b0 : this.state.tableData[1][0], b1 : this.state.tableData[1][1], b2 : this.state.tableData[1][2], b3 : this.state.tableData[1][3], b4 : this.state.tableData[1][4],
         c0 : this.state.tableData[2][0], c1 : this.state.tableData[2][1], c2 : this.state.tableData[2][2], c3 : this.state.tableData[2][3], c4 : this.state.tableData[2][4],
@@ -497,7 +469,7 @@ export default class TimetableScreen extends Component {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        id : this.state.userID,
+        id : this.props.userID,
         a0 : this.state.tableData[0][0], a1 : this.state.tableData[0][1], a2 : this.state.tableData[0][2], a3 : this.state.tableData[0][3], a4 : this.state.tableData[0][4],
         b0 : this.state.tableData[1][0], b1 : this.state.tableData[1][1], b2 : this.state.tableData[1][2], b3 : this.state.tableData[1][3], b4 : this.state.tableData[1][4],
         c0 : this.state.tableData[2][0], c1 : this.state.tableData[2][1], c2 : this.state.tableData[2][2], c3 : this.state.tableData[2][3], c4 : this.state.tableData[2][4],
@@ -526,7 +498,7 @@ export default class TimetableScreen extends Component {
                         [null,null,null,null,null],
                         [null,null,null,null,null]]
 
-    fetch(`http://115.85.183.157:3000/time?id=${this.state.userID}`,{
+    fetch(`http://115.85.183.157:3000/time?id=${this.props.userID}`,{
       method:'DELETE',
       headers:{
          //'Accept' : 'application/json',
