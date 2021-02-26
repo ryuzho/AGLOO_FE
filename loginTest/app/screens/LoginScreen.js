@@ -19,7 +19,7 @@ export default class login extends Component {
   };
 	
 	login = () =>{
-    // this.props.navigation.navigate("main");
+    //this.props.navigation.navigate("main");
 		const {userId,userPassword} = this.state;
 	
 		if(userId==""){

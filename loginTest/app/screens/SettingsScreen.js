@@ -1,12 +1,29 @@
-import React from "react";
-import { View, Text, StyleSheet, Button} from "react-native";
+import React, { useState, Component } from "react";
+import { FlatList, SafeAreaView, StatusBar, StyleSheet, Text, TouchableOpacity , View} from "react-native";
 
-const SettingsScreen = () => {
+export default class CommonTable extends Component{
+  
+  render(){
     return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>settings !</Text>
-      </View>
+      <SafeAreaView style={styles.container}>
+        <View><Text>This is SettingsScreen</Text></View>
+      </SafeAreaView>
     );
-  }
+  };
+}
 
-export default SettingsScreen;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    marginTop: StatusBar.currentHeight || 0,
+  },
+  item: {
+    padding: 20,
+    marginVertical: 8,
+    marginHorizontal: 16,
+  },
+  title: {
+    fontSize: 32,
+  },
+});
+
