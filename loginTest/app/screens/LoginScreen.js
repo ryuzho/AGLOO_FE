@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { NavigationContainer } from '@react-navigation/native'
-import { StyleSheet, Text, TextInput, View, TouchableOpacity, KeyboardAvoidingView, Keyboard } from 'react-native';
+import { StyleSheet, Text, TextInput, View, TouchableOpacity, KeyboardAvoidingView, Keyboard, ImageBackground } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 
 
@@ -63,16 +63,17 @@ export default class login extends Component {
   render(){
 
     return (
-      
+      //https://i.imgur.com/Fhkzs6Q.png
       <KeyboardAvoidingView style = {styles.container} behavior = "padding">
-      
+        <ImageBackground source = {{uri:"https://i.imgur.com/zX4uhuc.jpg"}} style = {styles.background}>
           <View>
-          <Text style = {styles.title}>Dong Dong</Text>
-          <Text style={{padding:10,margin:10,color:'red',alignSelf: 'center'}}>{this.state.id}</Text>
+          <Text style = {styles.title}></Text>
+          
           </View>
           <View style = {styles.inputForm}>
+          <Text style={{paddingTop:3,fontWeight : "700", color:'#DD4D07',alignSelf: 'center'}}>{this.state.id}</Text>
           <TextInput style = {styles.input} placeholder = "ID" onChangeText={userId => this.setState({userId})} /> 
-          <TextInput secureTextEntry={false} style = {styles.input} placeholder = "PASSWORD" onChangeText={userPassword => this.setState({userPassword})} /> 
+          <TextInput secureTextEntry={true} style = {styles.input} placeholder = "PASSWORD" onChangeText={userPassword => this.setState({userPassword})} /> 
             </View>
           <View style = {styles.buttonArea}>
           <TouchableOpacity
@@ -89,7 +90,7 @@ export default class login extends Component {
           </TouchableOpacity>
           </View>
           
-        
+        </ImageBackground>
       </KeyboardAvoidingView>
     
     );
@@ -100,24 +101,33 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
+    //alignItems: 'center',
     justifyContent: 'center',
+  },
+  background:{
+    //resizeMode: "cover",
+    width: "100%",
+    height: "100%",
+    justifyContent: "center"
   },
   title:{
     fontSize: 50,
     fontWeight: "800",
-    color:"#2D3436",
+    color:"#808000",
     alignSelf: "center",
     marginBottom: 20
 
   },
   inputForm:{
+    paddingTop : 100,
     width: '100%',
     alignItems: "center"
   },
   input:{
-    borderWidth: 1,
-    borderColor: "#24A6D9",
+    borderWidth: 2,
+    borderColor: "#3A445D",
+    backgroundColor : "white",
+    opacity : 0.7,
     borderRadius: 6,
     width: '70%',
     height: 50,
@@ -130,8 +140,10 @@ const styles = StyleSheet.create({
     alignItems :"center"
   },
   button:{
+    opacity : 0.7,
     borderWidth: 2,
-    backgroundColor: "#004ba0",
+    borderColor : "#3A445D",
+    backgroundColor: "#3A445D",
     borderRadius: 6,
     justifyContent: "center",
     alignItems: "center",
@@ -140,11 +152,15 @@ const styles = StyleSheet.create({
     marginTop: 8
   },
   buttonText: {
-    fontSize : 20,
+    fontWeight : "700",
+    fontSize : 17,
     color : "white"
   },
   registerbutton:{
+    opacity : 0.7,
     borderWidth: 2,
+    borderColor : "#3A445D",
+    backgroundColor: "#3A445D",
     borderRadius: 6,
     justifyContent: "center",
     alignItems: "center",
@@ -153,8 +169,9 @@ const styles = StyleSheet.create({
     marginTop: 8
   },
   registerbuttonText: {
-    fontSize : 15,
-    color : "#004ba0"
+    fontWeight : "700",
+    fontSize : 17,
+    color : "white"
   },
 
 });

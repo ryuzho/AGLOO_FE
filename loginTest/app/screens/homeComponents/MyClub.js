@@ -1,70 +1,31 @@
-import React, { Component } from 'react'
-import { Text, StyleSheet, View, ImageBackground, TouchableOpacity} from 'react-native'
+import * as React from 'react';
+import { createStackNavigator} from '@react-navigation/stack';
+import MyClubMain from './BoardComponents/MyClubMain';
+import BoardScreen from './BoardComponents/BoardScreen';
+import MakingBoardScreen from './BoardComponents/MakingBoardScreen';
+import ContentScreen from './BoardComponents/ContentScreen';
+import FixContentScreen from './BoardComponents/FixContentScreen';
 
 
-export default class MyClub extends Component {
-    
-    render() {
+
+
+
+const ClubStack = createStackNavigator();
+
+export default function MyClub({route}) {
+  const club_id = route.params.id
+  const img = route.params.img
+  return (
+
+      <ClubStack.Navigator screenOptions = {{headerShown: false}}>
+        <ClubStack.Screen name = "MyClubMain">
+          {(props)=> <MyClubMain {...props} club_id = {club_id} club_img = {img}/>}
+        </ClubStack.Screen>
+        <ClubStack.Screen name = "BoardScreen" component={BoardScreen}/>
+        <ClubStack.Screen name = "makingboard" component={MakingBoardScreen}/>
+        <ClubStack.Screen name = "contentscreen" component={ContentScreen}/>
+        <ClubStack.Screen name ="fixcontentscreen" component={FixContentScreen}/>
         
-        return(
-        <View style={styles.container}>
-            <View style={{flex : 2}}>
-            <ImageBackground source={{ uri: "https://i.imgur.com/iJoeUAS.png" }} style={styles.image}>
-                 <Text style={styles.text}>SOUL</Text>
-            </ImageBackground>
-            </View>
-            <View style = {{flex : 1, justifyContent:'space-evenly', alignItems: 'center'}}>
-                <TouchableOpacity style={styles.button}>
-                <Text style = {styles.buttonText}>공지사항</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.button} onPress={()=>this.props.navigation.navigate("ClubNoticeBoard")}>
-                <Text style = {styles.buttonText}>자유게시판</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.button}>
-                <Text style = {styles.buttonText}>활동게시판</Text>
-                </TouchableOpacity>
-          
-
-            </View>
-        </View>
-        );
-    }
+      </ClubStack.Navigator>
+  );
 }
-
-const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      flexDirection: "column",
-      backgroundColor: "#FFF5EE"
-      
-    },
-    image: {
-      flex: 1,
-      resizeMode: "cover",
-      justifyContent: "center"
-    },
-    text: {
-        opacity : 0.6,
-      color: "black",
-      fontSize: 42,
-      fontWeight: "bold",
-      textAlign: "center",
-      backgroundColor: "#FFF5EE"
-    },
-    button:{
-        backgroundColor : "#F8F8FF",
-        borderWidth: 2,
-        borderRadius: 6,
-        borderColor : '#696969',
-        justifyContent: "center",
-        alignItems: "center",
-        width: '80%',
-        height: 50,
-        marginTop: 8
-      },
-      buttonText: {
-        fontWeight : "800",
-        fontSize : 15,
-        color : "#000000"
-      }
-  });

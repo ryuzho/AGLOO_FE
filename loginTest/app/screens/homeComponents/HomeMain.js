@@ -36,7 +36,8 @@ export default class HomeMain extends Component {
     super(props);
     this.state = {
       my_token : '',
-      userID : ''
+      userID : '',
+      data : []
     };
     
 }
@@ -49,7 +50,7 @@ export default class HomeMain extends Component {
     }
   });
 
-    fetch('http://115.85.183.157:3000/auth',{
+  await fetch('http://115.85.183.157:3000/auth',{
 			method:'POST',
 			headers:{
 				 'Accept' : 'application/json',
@@ -63,17 +64,36 @@ export default class HomeMain extends Component {
 		 .then((response)=>{
 			 if(response.success){
         this.setState({userID:response.id})
-			 }else{
-        this.props.navigation.navigate("Login");
 			 }
+       else{
+        AsyncStorage.clear();
+        this.props.navigation.navigate("Login");
+       }
 		 })
 		 .catch((error)=>{
-		 //console.error(error);
+      //alert("error")
 		 });
+
+     fetch(`http://115.85.183.157:3000/myclub/${this.state.userID}`,{
+      method:'GET',
+      headers:{
+          'Accept' : 'application/json',
+          'Content-Type': 'application/json'
+      },
+      })
+      .then((response) => response.json())
+      .then((response) =>{
+        this.setState({data:response})
+      })
+      .catch((error) => Alert.alert("error"))
+      .finally(() => {
+        //this.setState({ isLoading : false });
+      });
+    
   }
 
   render(){
-    
+    const {data} = this.state;
     return (
       <SafeAreaView style = {{ flex : 1}}>
         <View style={{ flex: 1}}>
@@ -98,14 +118,14 @@ export default class HomeMain extends Component {
 
               <View style = {{height : 280, marginTop: 20}}>
               <FlatList 
-                data={tempData} 
-                keyExtractor={item => item.id.toString()} 
+                data={data} 
+                keyExtractor={item => item.club_id.toString()} 
                 horizontal={true} 
                 showsHorizontalScrollIndicator={false}
                 renderItem={({item})=>
-                <TouchableOpacity onPress={()=>this.props.navigation.navigate("MyClub")}>
-                 <Category imageUri = {{uri : item.imageUri}}
-                name = {item.name}
+                <TouchableOpacity onPress={()=>this.props.navigation.navigate("MyClub",{id : item.club_id, img:item.img})}>
+                 <Category imageUri = {{uri : item.img}}
+                name = {item.club_name}
                 /> 
                 </TouchableOpacity>
                 }

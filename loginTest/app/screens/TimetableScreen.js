@@ -1,5 +1,5 @@
 import React, { Component, useState} from 'react';
-import {SafeAreaView, KeyboardAvoidingView, Text, StyleSheet, View, TouchableOpacity, Modal, Alert, TextInput,ActivityIndicator} from 'react-native';
+import {ImageBackground, SafeAreaView, KeyboardAvoidingView, Text, StyleSheet, View, TouchableOpacity, Modal, Alert, TextInput,ActivityIndicator} from 'react-native';
 import {Picker} from '@react-native-picker/picker'
 import { Table, TableWrapper, Row, Rows, Col} from 'react-native-table-component';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -11,7 +11,7 @@ export default class TimetableScreen extends Component {
     super(props);
     this.state = {
       isTableLoading : false,
-      tableHead: ['', 'Mon', 'Tue', 'Wed','Thu','Fri'],
+      tableHead: ['', '월', '화', '수','목','금'],
       tableTitle: ['A', 'B', 'C', 'D', 'E', 'F', 'G'],
       tableData: [
         [null,null,null,null,null],
@@ -526,6 +526,7 @@ export default class TimetableScreen extends Component {
     
     return (
       <SafeAreaView style = {styles.container}>
+        <ImageBackground source = {{uri:null}} style = {styles.background}>
         <Modal
           animationType="slide"
           transparent={true}
@@ -615,6 +616,7 @@ export default class TimetableScreen extends Component {
           </TouchableOpacity>
       </View>
       </View>)}
+      </ImageBackground>
       </SafeAreaView>
     )
   }
@@ -624,11 +626,12 @@ export default class TimetableScreen extends Component {
 
 const styles = StyleSheet.create({
   container: { flex: 1, padding: 5, paddingTop: 50, alignContent : "center", backgroundColor: '#fff' },
+  background:{width : '100%', height:'92%'},
   head: {  height: 40, backgroundColor: '#f1f8ff'  },
   wrapper: { flexDirection: 'row' },
   title: { backgroundColor: '#f6f8fa' },
   row: {  height: 80  },
-  text: { textAlign: 'center' },
+  text: { textAlign: 'center', fontWeight : "700", fontSize : 15 },
   centeredView: {
     alignItems: 'center',
     height: '50%',
@@ -687,6 +690,8 @@ const styles = StyleSheet.create({
     flexDirection: "row"
   },
   addbutton:{
+    backgroundColor : "#FFFAFA",
+    borderColor : "#C0C0C0",
     borderWidth: 2,
     borderRadius: 6,
     justifyContent: "center",
@@ -697,9 +702,12 @@ const styles = StyleSheet.create({
   },
   addbuttonText: {
     fontSize : 15,
-    color : "#004ba0"
+    fontWeight : "800",
+    color : "#708090"
   },
   savebutton:{
+    backgroundColor : "#FFFAFA",
+    borderColor : "#C0C0C0",
     borderWidth: 2,
     borderRadius: 6,
     justifyContent: "center",
@@ -710,9 +718,13 @@ const styles = StyleSheet.create({
   },
   savebuttonText: {
     fontSize : 15,
-    color : "#004ba0"
+    fontWeight : "800",
+    color : "#708090"
   },
   deletebutton:{
+    backgroundColor : "#B22222",
+    borderColor : "#B22222",
+
     borderWidth: 2,
     borderRadius: 6,
     justifyContent: "center",
@@ -723,6 +735,7 @@ const styles = StyleSheet.create({
   },
   deletebuttonText: {
     fontSize : 15,
-    color : "red"
+    fontWeight : "800",
+    color : "white"
   }
 });
