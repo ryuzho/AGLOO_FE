@@ -50,8 +50,8 @@ export default class MainScreen extends Component{
         this.setState({userID:response.id})
 			 }
        else{
-         AsyncStorage.clear();
         this.props.navigation.navigate("Login");
+        AsyncStorage.clear()
        }
 		 })
 		 .catch((error)=>{
@@ -87,8 +87,9 @@ export default class MainScreen extends Component{
           },
         })}
         tabBarOptions={{
-          activeTintColor: 'blue',
-          inactiveTintColor: 'gray',
+          style:{backgroundColor : '#76b0be'},
+          activeTintColor: '#3A445D',
+          inactiveTintColor: 'white',
         }}
         
       >

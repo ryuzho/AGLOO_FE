@@ -684,6 +684,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   addbuttonArea:{
+    backgroundColor : '#fff',
     padding : 20,
     alignItems: "center",
     justifyContent : "space-between",

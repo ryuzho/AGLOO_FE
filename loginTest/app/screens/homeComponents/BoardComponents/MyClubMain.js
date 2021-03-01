@@ -83,49 +83,67 @@ export default class MyClubMain extends Component {
             </View>
             <View style={{marginTop : 33, justifyContent : 'space-between', marginLeft : 5}}>
               <View style = {{flexDirection : 'row', marginTop : 10}}>
-              <Ionicons name = 'ios-people' size = {30}/> 
-              <Text style = {{fontSize : 25, fontWeight : '700',marginLeft : 3}}>{this.state.sort}</Text>
+              <Ionicons name = 'ios-people' size = {20}/> 
+              <Text style = {{fontSize : 22, fontWeight : '700',marginLeft : 3}}>{this.state.sort}</Text>
               </View>
               <View style = {{flexDirection : 'row'}}>
-              <Ionicons name = 'ios-location' size = {20}/> 
-              <Text style = {{fontSize : 20, fontWeight : '700',marginLeft : 3}}>{this.state.locate}</Text>
+              <Ionicons name = 'ios-location' size = {15}/> 
+              <Text style = {{fontSize : 18, fontWeight : '600',marginLeft : 3}}>{this.state.locate}</Text>
               </View>
               <View style = {{flexDirection : 'row'}}>
               <AntDesign name = 'clockcircle' size = {15}/> 
-              <Text style = {{width : '60%', fontWeight : '700',marginLeft : 3}}>{this.state.time}</Text>
+              <Text style = {{width : '60%', fontWeight : '600',marginLeft : 3}}>{this.state.time}</Text>
               </View>
               <View style = {{flexDirection : 'row'}}>
-              <Entypo name = 'old-phone' size = {20}/>
-              <Text style = {{fontSize : 17, fontWeight : '700',marginLeft : 3}}>{this.state.phone}</Text>
+              <Entypo name = 'old-phone' size = {15}/>
+              <Text style = {{fontSize : 15, fontWeight : '600',marginLeft : 3}}>{this.state.phone}</Text>
               </View>
               <View style = {{flexDirection : 'row', marginBottom : 10}}>
-              <Entypo name = 'instagram' size = {20}/>
-              <Text style = {{fontSize : 20, fontWeight : '700',marginLeft : 3}}>{this.state.insta}</Text>
+              <Entypo name = 'instagram' size = {15}/>
+              <Text style = {{fontSize : 18, fontWeight : '600',marginLeft : 3}}>{this.state.insta}</Text>
               </View>
             </View>
             </View>
+            <View style = {{shadowOffset: { width: 1,height: 2},shadowOpacity: 0.7, shadowRadius: 4}}>
             <Text style={styles.text}>{this.state.club_name}</Text>
-            
-            <View style = {{flex : 1, justifyContent:'space-around', alignItems: 'center', backgroundColor : "#F5FFFA"}}>
-                <TouchableOpacity style={styles.button} onPress = {()=>this.setModalVisible(true)}>
+            </View>
+            <View style = {{flexDirection : 'row', marginTop : 10, justifyContent:'space-evenly'}}>
+              <TouchableOpacity style = {styles.button}>
+                <Text style = {styles.buttonText}>가입신청</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style = {styles.button} onPress = {()=>this.setModalVisible(true)}>
                 <Text style = {styles.buttonText}>동아리소개</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.button}>
+              </TouchableOpacity>
+            </View>
+           <View> 
+            <View style = {{flexDirection : 'row', justifyContent : 'space-evenly'}}>
+              <TouchableOpacity style = {styles.button}>
                 <Text style = {styles.buttonText}>공지사항</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.button}>
-                <Text style = {styles.buttonText}>공강시간표</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.button} onPress={()=>{this.props.navigation.navigate("BoardScreen")}}>
+              </TouchableOpacity>
+              <TouchableOpacity style = {styles.button} onPress={()=>{this.props.navigation.navigate("BoardScreen")}}>
                 <Text style = {styles.buttonText}>자유게시판</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.button}>
+              </TouchableOpacity>
+            </View>
+            <View style = {{flexDirection : 'row', justifyContent : 'space-evenly'}}>
+              <TouchableOpacity style = {styles.button}>
+                <Text style = {styles.buttonText}>사진갤러리</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style = {styles.button}>
                 <Text style = {styles.buttonText}>활동게시판</Text>
-                </TouchableOpacity>
+              </TouchableOpacity>
+            </View>
+          </View>
+          <View style = {{justifyContent : 'center', alignItems: 'center'}}>
+          <TouchableOpacity style = {styles.button}>
+                <Text style = {styles.buttonText}>공강시간표</Text>
+          </TouchableOpacity>
+          </View>
+
+            
+          
           
 
             </View>
-        </View>
         );
     }
 }
@@ -134,7 +152,7 @@ const styles = StyleSheet.create({
     container: {
       flex: 1,
       flexDirection: "column",
-      backgroundColor: "#FAF0E6"
+      backgroundColor: "#aaced7"
       
     },
     image: {
@@ -143,29 +161,30 @@ const styles = StyleSheet.create({
     },
     text: {
       opacity : 1,
-      color: "black",
-      fontSize: 60,
-      fontWeight: "bold",
+      color: "white",
+      fontSize: 50,
+      fontWeight: "600",
       textAlign: "center",
-      backgroundColor: "#FFFFE0"
+      backgroundColor: "#4f96a7",
+      
     },
     button:{
-        backgroundColor : "#C0C0C0",
-        borderWidth: 5,
-        borderRadius: 15,
-        borderColor : 'white',
-        justifyContent: "center",
-        alignItems: "center",
-        width: '60%',
-        height: 70,
-        marginTop: 8
-      },
-      buttonText: {
-        fontWeight : "800",
-        fontSize : 20,
-        color : "#000000"
-      },
-      centeredView: {
+      opacity : 0.7,
+      borderColor : "#3A445D",
+      backgroundColor: "#3A445D",
+      borderRadius: 6,
+      justifyContent: "center",
+      alignItems: "center",
+      width:'40%',
+      height: 50,
+      marginTop: 10
+    },
+    buttonText: {
+      fontWeight : "700",
+      fontSize : 14,
+      color : "white"
+    },
+    centeredView: {
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
@@ -207,7 +226,7 @@ const styles = StyleSheet.create({
         alignSelf : 'stretch', 
         justifyContent : 'flex-end', 
         borderBottomWidth : 3.5,
-        borderBottomColor : "blue",
+        borderBottomColor : "#3e91b5",
         marginVertical : 5,
         marginHorizontal : 10
     }

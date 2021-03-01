@@ -4,13 +4,13 @@ import { Text, StyleSheet, View, Image } from 'react-native'
 export default class Category extends Component {
     render() {
         return (
-            <View style = {{height:230, width:150, marginLeft : 20, borderWidth:0.4, borderColor: '#dddddd'}}>
+            <View style = {{height:230, width:150, marginLeft : 20, borderWidth:0.4, borderColor: '#dddddd', backgroundColor:"white"}}>
                     <View style = {{flex : 6}}>
                        <Image source = {this.props.imageUri}
                       style = {{flex:1, width:null,
                         height:null, resizeMode: 'cover'}}/> 
                     </View>
-                    <View style = {{flex : 1, paddingLeft:10, paddingTop:3, backgroundColor : 'black',justifyContent: 'center', alignItems: 'center'}}>
+                    <View style = {{flex : 1, paddingTop:3, backgroundColor : 'black',justifyContent: 'center', alignItems: 'center'}}>
                       <Text style = {{color : 'white', fontSize : 15, fontWeight : "700"}}>{this.props.name}</Text>
                     </View>
 

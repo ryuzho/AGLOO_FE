@@ -66,8 +66,8 @@ export default class HomeMain extends Component {
         this.setState({userID:response.id})
 			 }
        else{
-        AsyncStorage.clear();
         this.props.navigation.navigate("Login");
+        AsyncStorage.clear();
        }
 		 })
 		 .catch((error)=>{
@@ -95,9 +95,9 @@ export default class HomeMain extends Component {
   render(){
     const {data} = this.state;
     return (
-      <SafeAreaView style = {{ flex : 1}}>
-        <View style={{ flex: 1}}>
-          <View style = {{ height : this.starHeaderHeight, backgroundColor : 'white',
+      <SafeAreaView style = {{ flex : 1, backgroundColor : '#aaced7'}}>
+        <View style={{ flex: 1, backgroundColor:"#aaced7"}}>
+          <View style = {{ height : this.starHeaderHeight, backgroundColor : '#aaced7',
           borderBottomWidth : 1, borderBottomColor : '#dddddd'}}>
             <View style = {{flexDirection: 'row', padding:10,backgroundColor: 'white', marginHorizontal:20, 
                             shadowOffset : { width : 0, height : 0}, shadowColor: '#000', shadowOpacity: 0.2,elevation : 1, marginTop: Platform.OS == 'android' ? 30 : null}}>
@@ -107,16 +107,16 @@ export default class HomeMain extends Component {
                 placeholder = " 동아리를 검색하세요"
                 placeholderTextColor="grey"
                 style = {{ flex : 1, fontWeight: '700',
-                backgroundColor : 'white'}}/>
+                backgroundColor : 'white',borderRadius : 5}}/>
             </View>
           </View>
           <ScrollView scrollEventThrottle = {16}>
-            <View style = {{flex:1, backgroundColor:'white', paddingTop : 20}}>
+            <View style = {{flex:1, backgroundColor:'#7dacb7e', paddingTop : 20}}>
               <Text style = {{fontSize:24, fontWeight: '700', paddingHorizontal: 20}}>
                 {`${this.state.userID}님의 동아리`}
               </Text>
 
-              <View style = {{height : 280, marginTop: 20,shadowColor: "#000",shadowOffset: { width: 0,height: 2},shadowOpacity: 0.25, shadowRadius: 4}}>                       
+              <View style = {{height : 280, marginTop: 20,shadowColor: "#000",shadowOffset: { width: 0,height: 2},shadowOpacity: 0.7, shadowRadius: 4}}>                       
               <FlatList 
                 data={data} 
                 keyExtractor={item => item.club_id.toString()} 

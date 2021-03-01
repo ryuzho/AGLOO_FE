@@ -15,8 +15,7 @@ import {
     Alert
   } from "react-native";
 import Icon from 'react-native-vector-icons/Ionicons'
-import ClubData from '../../../SearchClubData'
-
+import { Ionicons, AntDesign, Entypo } from '@expo/vector-icons';
 
 export default class SearchMain extends Component {
 
@@ -25,6 +24,7 @@ export default class SearchMain extends Component {
     this.state = {
       club_data : [],
       isLoading : true,
+      search_club_name : ''
     }
   }
 
@@ -51,14 +51,16 @@ export default class SearchMain extends Component {
       if(item.depart == depart)
       return(
         <TouchableOpacity onPress={()=>this.props.navigation.navigate("MyClub",{id : item.club_id,img:item.img})}>
-         <View style = {{height:200, width:120, marginLeft : 20, borderWidth:1, borderColor: colors[depart-1]}}>
+         <View style = {{borderRadius:8, backgroundColor:colors[depart-1], height:200, width:120, marginLeft : 20, borderWidth:2, borderColor: colors[depart-1],
+        shadowColor: "#000",shadowOffset: { width: 0,height: 2},shadowOpacity: 0.7, shadowRadius: 4}}>
         <View style = {{flex : 6}}>
            <Image source = {{uri : item.img}}
-          style = {{flex:1, width : null,
+          style = {{marginTop:2,marginHorizontal:1, flex:1, width : null,
             height:null, resizeMode: 'cover'}}/> 
         </View>
-        <View style = {{flex : 1, paddingLeft:10, paddingTop:3, backgroundColor : colors[depart-1],justifyContent: 'center', alignItems: 'center'}}>
-          <Text style = {{color : 'white', fontSize : 15, fontWeight : "700"}}>{item.club_name}</Text>
+        <View style = {styles.clubHeader}/>
+        <View style = {{flex : 1 , paddingTop:3, backgroundColor : colors[depart-1],justifyContent: 'center', alignItems: 'center'}}>
+          <Text style = {{color : 'white', fontSize : 13, fontWeight : "700"}}>{item.club_name}</Text>
         </View>
 
       </View>
@@ -68,27 +70,33 @@ export default class SearchMain extends Component {
     render(){
     
         return (
-          <SafeAreaView style = {{ flex : 1, backgroundColor : "white"}}>
+          <SafeAreaView style = {{ flex : 1, backgroundColor : "#aaced7"}}>
             <View style={{ flex: 1, backgroundColor : "white"}}>
-              <View style = {{ height : this.starHeaderHeight, backgroundColor : 'white',
+              <View style = {{ height : this.starHeaderHeight, backgroundColor : '#aaced7',
               borderBottomWidth : 1, borderBottomColor : '#dddddd'}}>
                 <View style = {{flexDirection: 'row', padding:10,backgroundColor: 'white', marginHorizontal:20, 
                                 shadowOffset : { width : 0, height : 0}, shadowColor: 'black', shadowOpacity: 0.2,elevation : 1, marginTop: Platform.OS == 'android' ? 30 : null}}>
                   <Icon name = "ios-search" size = {20} />
                   <TextInput
-                  underlineColorAndroid = "transparent"
+                    underlineColorAndroid = "transparent"
                     placeholder = " 동아리를 검색하세요"
                     placeholderTextColor="grey"
+                    onChangeText={search_club_name => this.setState({search_club_name})}
                     style = {{ flex : 1, fontWeight: '700',
                     backgroundColor : 'white'}}/>
                 </View>
               </View>
-              <ScrollView scrollEventThrottle = {16}>
+              <ScrollView scrollEventThrottle = {16} style = {{backgroundColor:"#aaced7"}}>
               <View style = {{paddingTop : 10}}>
+                <View style = {{flexDirection : 'row'}}>
               <Text style = {styles.headerText}>체육</Text>
+              <TouchableOpacity style = {{marginRight : 25, marginTop : 5}} onPress={()=>this.props.navigation.navigate("addNewClub")}>
+                <AntDesign name = 'plussquareo' size = {27} color = '#8B0000'/>
+              </TouchableOpacity>
+              </View>
               <View style = {[styles.header,{borderBottomColor : "#8B0000"}]}/>
                 
-                <View style = {{flex:1, backgroundColor:'white', paddingTop : 10}}>
+                <View style = {{flex:1, backgroundColor:'#aaced7', paddingTop : 10}}>
     
                   <View style = {{height : 220, marginTop: 7}}>
                   <FlatList 
@@ -108,7 +116,7 @@ export default class SearchMain extends Component {
               <Text style = {styles.headerText}>연행예술</Text>
               <View style = {[styles.header,{borderBottomColor : "#FF8C00"}]}/>
                 
-                <View style = {{flex:1, backgroundColor:'white', paddingTop : 10}}>
+                <View style = {{flex:1, backgroundColor:'#aaced7', paddingTop : 10}}>
     
                   <View style = {{height : 220, marginTop: 7}}>
                   <FlatList 
@@ -129,7 +137,7 @@ export default class SearchMain extends Component {
               <Text style = {styles.headerText}>사회활동</Text>
               <View style = {[styles.header,{borderBottomColor : "#FFD700"}]}/>
                 
-                <View style = {{flex:1, backgroundColor:'white', paddingTop : 10}}>
+                <View style = {{flex:1, backgroundColor:'#aaced7', paddingTop : 10}}>
     
                   <View style = {{height : 220, marginTop: 7}}>
                   <FlatList 
@@ -147,7 +155,7 @@ export default class SearchMain extends Component {
                 <Text style = {styles.headerText}>레저스포츠</Text>
                   <View style = {[styles.header,{borderBottomColor : "#008000"}]}/>
                 
-                <View style = {{flex:1, backgroundColor:'white', paddingTop : 10}}>
+                <View style = {{flex:1, backgroundColor:'#aaced7', paddingTop : 10}}>
     
                   <View style = {{height : 220, marginTop: 7}}>
                   <FlatList 
@@ -166,7 +174,7 @@ export default class SearchMain extends Component {
                 <Text style = {styles.headerText}>과학기술</Text>
                   <View style = {[styles.header,{borderBottomColor : "#00BFFF"}]}/>
                 
-                <View style = {{flex:1, backgroundColor:'white', paddingTop : 10}}>
+                <View style = {{flex:1, backgroundColor:'#aaced7', paddingTop : 10}}>
     
                   <View style = {{height : 220, marginTop: 7}}>
                   <FlatList 
@@ -185,7 +193,7 @@ export default class SearchMain extends Component {
                 <Text style = {styles.headerText}>학술언론</Text>
                   <View style = {[styles.header,{borderBottomColor : "#0000CD"}]}/>
                 
-                <View style = {{flex:1, backgroundColor:'white', paddingTop : 10}}>
+                <View style = {{flex:1, backgroundColor:'#aaced7', paddingTop : 10}}>
     
                   <View style = {{height : 220, marginTop: 7}}>
                   <FlatList 
@@ -204,7 +212,7 @@ export default class SearchMain extends Component {
                 <Text style = {styles.headerText}>창작전시</Text>
                   <View style = {[styles.header,{borderBottomColor : "#663399"}]}/>
                 
-                <View style = {{flex:1, backgroundColor:'white', paddingTop : 10}}>
+                <View style = {{flex:1, backgroundColor:'#aaced7', paddingTop : 10}}>
     
                   <View style = {{height : 220, marginTop: 7}}>
                   <FlatList 
@@ -223,7 +231,7 @@ export default class SearchMain extends Component {
                 <Text style = {styles.headerText}>종교</Text>
                   <View style = {[styles.header,{borderBottomColor : "#BC8F8F"}]}/>
                 
-                <View style = {{flex:1, backgroundColor:'white', paddingTop : 10}}>
+                <View style = {{flex:1, backgroundColor:'#aaced7', paddingTop : 10}}>
     
                   <View style = {{height : 220, marginTop: 7}}>
                   <FlatList 
@@ -264,6 +272,16 @@ const styles = StyleSheet.create({
         marginRight: 150,
         marginLeft : 20, 
         borderBottomWidth : 3.5,
-    }
+        shadowOffset: { width: 1,height: 2},shadowOpacity: 0.7, shadowRadius: 4
+    },
+    clubHeader : {
+      flex : 0.2, 
+      alignSelf : 'stretch', 
+      justifyContent : 'flex-end', 
+      marginRight: 7,
+      marginLeft : 7, 
+      borderBottomWidth : 1.3,
+      borderBottomColor : 'white'
+  }
 
 })
