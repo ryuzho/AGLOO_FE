@@ -100,7 +100,7 @@ export default class HomeMain extends Component {
           <View style = {{ height : this.starHeaderHeight, backgroundColor : 'white',
           borderBottomWidth : 1, borderBottomColor : '#dddddd'}}>
             <View style = {{flexDirection: 'row', padding:10,backgroundColor: 'white', marginHorizontal:20, 
-                            shadowOffset : { width : 0, height : 0}, shadowColor: 'black', shadowOpacity: 0.2,elevation : 1, marginTop: Platform.OS == 'android' ? 30 : null}}>
+                            shadowOffset : { width : 0, height : 0}, shadowColor: '#000', shadowOpacity: 0.2,elevation : 1, marginTop: Platform.OS == 'android' ? 30 : null}}>
               <Icon name = "ios-search" size = {20} />
               <TextInput
               underlineColorAndroid = "transparent"
@@ -116,7 +116,7 @@ export default class HomeMain extends Component {
                 {`${this.state.userID}님의 동아리`}
               </Text>
 
-              <View style = {{height : 280, marginTop: 20}}>
+              <View style = {{height : 280, marginTop: 20,shadowColor: "#000",shadowOffset: { width: 0,height: 2},shadowOpacity: 0.25, shadowRadius: 4}}>                       
               <FlatList 
                 data={data} 
                 keyExtractor={item => item.club_id.toString()} 

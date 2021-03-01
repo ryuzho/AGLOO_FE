@@ -19,6 +19,51 @@ import ClubData from '../../../SearchClubData'
 
 
 export default class SearchMain extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      club_data : [],
+      isLoading : true,
+    }
+  }
+
+    componentDidMount(){
+      fetch(`http://115.85.183.157:3000/club`,{
+      method:'GET',
+      headers:{
+          'Accept' : 'application/json',
+          'Content-Type': 'application/json'
+      },
+      })
+      .then((response) => response.json())
+      .then((response) =>{
+        this.setState({club_data:response})
+      })
+      .catch((error) => Alert.alert("error"))
+      .finally(() => {
+        this.setState({ isLoading : false });
+      });
+    }
+
+    renderItem = ({item},depart) =>{
+      const colors = ['#8B0000','#FF8C00','#FFD700','#008000','#00BFFF','#0000CD','#663399','#BC8F8F']
+      if(item.depart == depart)
+      return(
+        <TouchableOpacity onPress={()=>this.props.navigation.navigate("MyClub",{id : item.club_id,img:item.img})}>
+         <View style = {{height:200, width:120, marginLeft : 20, borderWidth:1, borderColor: colors[depart-1]}}>
+        <View style = {{flex : 6}}>
+           <Image source = {{uri : item.img}}
+          style = {{flex:1, width : null,
+            height:null, resizeMode: 'cover'}}/> 
+        </View>
+        <View style = {{flex : 1, paddingLeft:10, paddingTop:3, backgroundColor : colors[depart-1],justifyContent: 'center', alignItems: 'center'}}>
+          <Text style = {{color : 'white', fontSize : 15, fontWeight : "700"}}>{item.club_name}</Text>
+        </View>
+
+      </View>
+        </TouchableOpacity>)
+  }
   
     render(){
     
@@ -47,60 +92,31 @@ export default class SearchMain extends Component {
     
                   <View style = {{height : 220, marginTop: 7}}>
                   <FlatList 
-                    data={ClubData.slice(0,4)} 
-                    keyExtractor={item => item.id.toString()} 
+                    data={this.state.club_data} 
+                    keyExtractor={item => item.club_id.toString()} 
                     horizontal={true} 
                     showsHorizontalScrollIndicator={false}
-                    renderItem={({item})=>
-                    <TouchableOpacity onPress={()=>this.props.navigation.navigate("MyClub",{id : item.id})}>
-                     <View style = {{height:200, width:120, marginLeft : 20, borderWidth:1, borderColor: '#8B0000'}}>
-                    <View style = {{flex : 6}}>
-                       <Image source = {{uri : item.imageUri}}
-                      style = {{flex:1, width : null,
-                        height:null, resizeMode: 'cover'}}/> 
-                    </View>
-                    <View style = {{flex : 1, paddingLeft:10, paddingTop:3, backgroundColor : '#8B0000',justifyContent: 'center', alignItems: 'center'}}>
-                      <Text style = {{color : 'white', fontSize : 15, fontWeight : "700"}}>{item.name}</Text>
-                    </View>
-
-                  </View>
-                    </TouchableOpacity>
-                    }
+                    renderItem={item=>this.renderItem(item,1)}
                     keyboardShouldPersistTaps = "always"
                     />
-
                   </View>
                   </View>
                   
     
                   </View>
                   <View style = {{paddingTop : 10}}>
-              <Text style = {styles.headerText}>과학기술</Text>
+              <Text style = {styles.headerText}>연행예술</Text>
               <View style = {[styles.header,{borderBottomColor : "#FF8C00"}]}/>
                 
                 <View style = {{flex:1, backgroundColor:'white', paddingTop : 10}}>
     
                   <View style = {{height : 220, marginTop: 7}}>
                   <FlatList 
-                    data={ClubData.slice(4,7)} 
-                    keyExtractor={item => item.id.toString()} 
+                    data={this.state.club_data} 
+                    keyExtractor={item => item.club_id.toString()} 
                     horizontal={true} 
                     showsHorizontalScrollIndicator={false}
-                    renderItem={({item})=>
-                    <TouchableOpacity>
-                     <View style = {{height:200, width:120, marginLeft : 20, borderWidth:1, borderColor: "#FF8C00"}}>
-                    <View style = {{flex : 6}}>
-                       <Image source = {{uri : item.imageUri}}
-                      style = {{flex:1, width:null,
-                        height:null, resizeMode: 'cover'}}/> 
-                    </View>
-                    <View style = {{flex : 1, paddingLeft:10, paddingTop:3, backgroundColor : '#FF8C00',justifyContent: 'center', alignItems: 'center'}}>
-                      <Text style = {{color : 'white', fontSize : 15, fontWeight : "700"}}>{item.name}</Text>
-                    </View>
-
-                  </View>
-                    </TouchableOpacity>
-                    }
+                    renderItem={item=>this.renderItem(item,2)}
                     keyboardShouldPersistTaps = "always"
                     />
 
@@ -117,68 +133,114 @@ export default class SearchMain extends Component {
     
                   <View style = {{height : 220, marginTop: 7}}>
                   <FlatList 
-                    data={ClubData.slice(7,10)} 
-                    keyExtractor={item => item.id.toString()} 
+                    data={this.state.club_data} 
+                    keyExtractor={item => item.club_id.toString()} 
                     horizontal={true} 
                     showsHorizontalScrollIndicator={false}
-                    renderItem={({item})=>
-                    <TouchableOpacity>
-                     <View style = {{height:200, width:120, marginLeft : 20, borderWidth:1, borderColor: '#FFD700'}}>
-                    <View style = {{flex : 6}}>
-                       <Image source = {{uri : item.imageUri}}
-                      style = {{flex:1, width:null,
-                        height:null, resizeMode: 'cover'}}/> 
-                    </View>
-                    <View style = {{flex : 1, paddingLeft:10, paddingTop:3, backgroundColor : '#FFD700',justifyContent: 'center', alignItems: 'center'}}>
-                      <Text style = {{color : 'white', fontSize : 15, fontWeight : "700"}}>{item.name}</Text>
-                    </View>
-
-                  </View>
-                    </TouchableOpacity>
-                    }
+                    renderItem={item=>this.renderItem(item,3)}
                     keyboardShouldPersistTaps = "always"
                     />
-
                   </View>
                   </View>
-                  
-    
                   </View>
-                  <View style = {{paddingTop : 10}}>
-              <Text style = {styles.headerText}>연행예술</Text>
-              <View style = {[styles.header,{borderBottomColor : "#0000CD"}]}/>
+              <View style = {{paddingTop : 10}}>
+                <Text style = {styles.headerText}>레저스포츠</Text>
+                  <View style = {[styles.header,{borderBottomColor : "#008000"}]}/>
                 
                 <View style = {{flex:1, backgroundColor:'white', paddingTop : 10}}>
     
                   <View style = {{height : 220, marginTop: 7}}>
                   <FlatList 
-                    data={ClubData.slice(10,14)} 
-                    keyExtractor={item => item.id.toString()} 
+                    data={this.state.club_data} 
+                    keyExtractor={item => item.club_id.toString()} 
                     horizontal={true} 
                     showsHorizontalScrollIndicator={false}
-                    renderItem={({item})=>
-                    <TouchableOpacity>
-                     <View style = {{height:200, width:120, marginLeft : 20, borderWidth:1, borderColor: '#0000CD'}}>
-                    <View style = {{flex : 6}}>
-                       <Image source = {{uri : item.imageUri}}
-                      style = {{flex:1, width:null,
-                        height:null, resizeMode: 'cover'}}/> 
-                    </View>
-                    <View style = {{flex : 1, paddingLeft:10, paddingTop:3, backgroundColor : '#0000CD',justifyContent: 'center', alignItems: 'center'}}>
-                      <Text style = {{color : 'white', fontSize : 15, fontWeight : "700"}}>{item.name}</Text>
-                    </View>
-
-                  </View>
-                    </TouchableOpacity>
-                    }
+                    renderItem={item=>this.renderItem(item,4)}
                     keyboardShouldPersistTaps = "always"
                     />
+                  </View>
+                </View>
+             </View>
 
-                  </View>
-                  </View>
-                  
+             <View style = {{paddingTop : 10}}>
+                <Text style = {styles.headerText}>과학기술</Text>
+                  <View style = {[styles.header,{borderBottomColor : "#00BFFF"}]}/>
+                
+                <View style = {{flex:1, backgroundColor:'white', paddingTop : 10}}>
     
+                  <View style = {{height : 220, marginTop: 7}}>
+                  <FlatList 
+                    data={this.state.club_data} 
+                    keyExtractor={item => item.club_id.toString()} 
+                    horizontal={true} 
+                    showsHorizontalScrollIndicator={false}
+                    renderItem={item=>this.renderItem(item,5)}
+                    keyboardShouldPersistTaps = "always"
+                    />
                   </View>
+                </View>
+             </View>
+
+             <View style = {{paddingTop : 10}}>
+                <Text style = {styles.headerText}>학술언론</Text>
+                  <View style = {[styles.header,{borderBottomColor : "#0000CD"}]}/>
+                
+                <View style = {{flex:1, backgroundColor:'white', paddingTop : 10}}>
+    
+                  <View style = {{height : 220, marginTop: 7}}>
+                  <FlatList 
+                    data={this.state.club_data} 
+                    keyExtractor={item => item.club_id.toString()} 
+                    horizontal={true} 
+                    showsHorizontalScrollIndicator={false}
+                    renderItem={item=>this.renderItem(item,6)}
+                    keyboardShouldPersistTaps = "always"
+                    />
+                  </View>
+                </View>
+             </View>
+
+             <View style = {{paddingTop : 10}}>
+                <Text style = {styles.headerText}>창작전시</Text>
+                  <View style = {[styles.header,{borderBottomColor : "#663399"}]}/>
+                
+                <View style = {{flex:1, backgroundColor:'white', paddingTop : 10}}>
+    
+                  <View style = {{height : 220, marginTop: 7}}>
+                  <FlatList 
+                    data={this.state.club_data} 
+                    keyExtractor={item => item.club_id.toString()} 
+                    horizontal={true} 
+                    showsHorizontalScrollIndicator={false}
+                    renderItem={item=>this.renderItem(item,7)}
+                    keyboardShouldPersistTaps = "always"
+                    />
+                  </View>
+                </View>
+             </View>
+
+             <View style = {{paddingTop : 10}}>
+                <Text style = {styles.headerText}>종교</Text>
+                  <View style = {[styles.header,{borderBottomColor : "#BC8F8F"}]}/>
+                
+                <View style = {{flex:1, backgroundColor:'white', paddingTop : 10}}>
+    
+                  <View style = {{height : 220, marginTop: 7}}>
+                  <FlatList 
+                    data={this.state.club_data} 
+                    keyExtractor={item => item.club_id.toString()} 
+                    horizontal={true} 
+                    showsHorizontalScrollIndicator={false}
+                    renderItem={item=>this.renderItem(item,8)}
+                    keyboardShouldPersistTaps = "always"
+                    />
+                  </View>
+                </View>
+             </View>
+
+             
+
+
               </ScrollView>
     
             </View>
