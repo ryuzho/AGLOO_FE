@@ -14,12 +14,11 @@ const ClubStack = createStackNavigator();
 
 export default function MyClub({route}) {
   const club_id = route.params.id
-  const img = route.params.img
   return (
 
       <ClubStack.Navigator screenOptions = {{headerShown: false}}>
         <ClubStack.Screen name = "MyClubMain">
-          {(props)=> <MyClubMain {...props} club_id = {club_id} club_img = {img}/>}
+          {(props)=> <MyClubMain {...props} club_id = {club_id}/>}
         </ClubStack.Screen>
         <ClubStack.Screen name = "BoardScreen" component={BoardScreen}/>
         <ClubStack.Screen name = "makingboard" component={MakingBoardScreen}/>

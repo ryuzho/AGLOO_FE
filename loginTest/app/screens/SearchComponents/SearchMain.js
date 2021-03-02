@@ -19,6 +19,14 @@ import { Ionicons, AntDesign, Entypo } from '@expo/vector-icons';
 
 export default class SearchMain extends Component {
 
+  UNSAFE_componentWillMount(){
+    this.starHeaderHeight = 80
+    if(Platform.OS == 'android')
+    {
+      this.starHeaderHeight = 100 + StatusBar.currentHeight
+    }
+  }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -50,7 +58,7 @@ export default class SearchMain extends Component {
       const colors = ['#8B0000','#FF8C00','#FFD700','#008000','#00BFFF','#0000CD','#663399','#BC8F8F']
       if(item.depart == depart)
       return(
-        <TouchableOpacity onPress={()=>this.props.navigation.navigate("MyClub",{id : item.club_id,img:item.img})}>
+        <TouchableOpacity onPress={()=>this.props.navigation.navigate("MyClub",{id : item.club_id})}>
          <View style = {{borderRadius:8, backgroundColor:colors[depart-1], height:120, width:100, marginLeft : 20, borderWidth:2, borderColor: colors[depart-1],
         shadowColor: "#000",shadowOffset: { width: 0,height: 2},shadowOpacity: 0.7, shadowRadius: 4}}>
         <View style = {{flex : 6}}>
@@ -65,6 +73,23 @@ export default class SearchMain extends Component {
 
       </View>
         </TouchableOpacity>)
+  }
+  searchClub=(club_name)=>{
+    fetch(`http://115.85.183.157:3000/search?club_name=${club_name}`,{
+      method:'GET',
+      headers:{
+          'Accept' : 'application/json',
+          'Content-Type': 'application/json'
+      },
+      })
+      .then((response) => response.json())
+      .then((response) =>{
+        this.props.navigation.navigate("MyClub",{id : response.club_id})
+      })
+      .catch((error) => Alert.alert("동아리가 존재하지 않습니다"))
+      .finally(() => {
+        this.setState({ isLoading : false });
+      });
   }
   
     render(){
@@ -82,6 +107,7 @@ export default class SearchMain extends Component {
                     placeholder = " 동아리를 검색하세요"
                     placeholderTextColor="grey"
                     onChangeText={search_club_name => this.setState({search_club_name})}
+                    onSubmitEditing = {()=>this.searchClub(this.state.search_club_name)}
                     style = {{ flex : 1, fontWeight: '700',
                     backgroundColor : 'white'}}/>
                 </View>

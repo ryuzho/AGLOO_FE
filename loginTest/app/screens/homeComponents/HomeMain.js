@@ -123,7 +123,7 @@ export default class HomeMain extends Component {
                 horizontal={true} 
                 showsHorizontalScrollIndicator={false}
                 renderItem={({item})=>
-                <TouchableOpacity onPress={()=>this.props.navigation.navigate("MyClub",{id : item.club_id, img:item.img})}>
+                <TouchableOpacity onPress={()=>this.props.navigation.navigate("MyClub",{id : item.club_id})}>
                  <Category imageUri = {{uri : `http://115.85.183.157:3000${item.img}`}}
                 name = {item.club_name}
                 /> 

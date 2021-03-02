@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Text, StyleSheet, View, Image, TouchableOpacity, Alert, Modal,Pressable} from 'react-native'
-import { Ionicons, AntDesign, Entypo } from '@expo/vector-icons';
+import { Ionicons, AntDesign, Entypo,Foundation } from '@expo/vector-icons';
 
 export default class MyClubMain extends Component {
   constructor(props) {
@@ -13,6 +13,7 @@ export default class MyClubMain extends Component {
       phone : '',
       insta : '',
       intro : '',
+      img : '',
       isLoading : true,
       modalVisible: false
     }
@@ -31,6 +32,7 @@ export default class MyClubMain extends Component {
       .then((response) => response.json())
       .then((response) =>{
         this.setState({club_name:response.club_name})
+        this.setState({img:response.img})
         this.setState({sort:response.sort})
         this.setState({locate:response.locate})
         this.setState({time:response.time})
@@ -78,33 +80,33 @@ export default class MyClubMain extends Component {
           </View>
         </Modal>
           <View style = {{flexDirection : "row"}}>
-            <View style={{marginTop : 33}}>
-            <Image source={{ uri: `http://115.85.183.157:3000${this.props.club_img}` }} style={styles.image}/>
+            <View style={{marginTop : 40}}>
+            <Image source={{ uri: `http://115.85.183.157:3000${this.state.img}` }} style={styles.image}/>
             </View>
-            <View style={{marginTop : 33, justifyContent : 'space-between', marginLeft : 5}}>
+            <View style={{marginTop : 43, justifyContent : 'space-between', marginLeft : 5}}>
               <View style = {{flexDirection : 'row', marginTop : 10}}>
-              <Ionicons name = 'ios-people' size = {20}/> 
-              <Text style = {{fontSize : 22, fontWeight : '700',marginLeft : 3}}>{this.state.sort}</Text>
+              <Foundation name = 'home' size = {20}/> 
+              <Text style = {{fontSize : 22, fontWeight : '700',marginLeft : 7}}>{this.state.sort}</Text>
               </View>
               <View style = {{flexDirection : 'row'}}>
-              <Ionicons name = 'ios-location' size = {15}/> 
-              <Text style = {{fontSize : 18, fontWeight : '600',marginLeft : 3}}>{this.state.locate}</Text>
+              <Ionicons name = 'ios-location' size = {15} style = {{paddingTop : 3}}/> 
+              <Text style = {{fontSize : 18, fontWeight : '600',marginLeft : 7}}>{this.state.locate}</Text>
               </View>
               <View style = {{flexDirection : 'row'}}>
-              <AntDesign name = 'clockcircle' size = {15}/> 
-              <Text style = {{width : '60%', fontWeight : '600',marginLeft : 3}}>{this.state.time}</Text>
+              <AntDesign name = 'clockcircle' size = {15} style = {{paddingTop : 2}}/> 
+              <Text style = {{fontWeight : '600',marginLeft : 7}}>{this.state.time}</Text>
               </View>
               <View style = {{flexDirection : 'row'}}>
-              <Entypo name = 'old-phone' size = {15}/>
-              <Text style = {{fontSize : 15, fontWeight : '600',marginLeft : 3}}>{this.state.phone}</Text>
+              <Entypo name = 'phone' size = {15} style = {{paddingTop : 2.5}}/>
+              <Text style = {{fontSize : 15, fontWeight : '600',marginLeft : 7}}>{this.state.phone}</Text>
               </View>
-              <View style = {{flexDirection : 'row', marginBottom : 10}}>
-              <Entypo name = 'instagram' size = {15}/>
-              <Text style = {{fontSize : 18, fontWeight : '600',marginLeft : 3}}>{this.state.insta}</Text>
+              <View style = {{flexDirection : 'row'}}>
+              <Entypo name = 'instagram' size = {15} style = {{paddingTop : 5}}/>
+              <Text style = {{fontSize : 18, fontWeight : '600',marginLeft : 7,marginBottom : 5}}>{this.state.insta}</Text>
               </View>
             </View>
             </View>
-            <View style = {{shadowOffset: { width: 1,height: 2},shadowOpacity: 0.7, shadowRadius: 4}}>
+            <View style = {{marginTop : 10, shadowOffset: { width: 1,height: 2},shadowOpacity: 0.7, shadowRadius: 4}}>
             <Text style={styles.text}>{this.state.club_name}</Text>
             </View>
             <View style = {{flexDirection : 'row', marginTop : 10, justifyContent:'space-evenly'}}>
@@ -156,13 +158,17 @@ const styles = StyleSheet.create({
       
     },
     image: {
-      width: 200,
-      height: 200,
+      borderRadius : 10,
+      marginTop : 10,
+      marginHorizontal : 10,
+      width: 140,
+      height: 140,
     },
     text: {
+      paddingVertical : 10,
       opacity : 1,
       color: "white",
-      fontSize: 50,
+      fontSize: 40,
       fontWeight: "600",
       textAlign: "center",
       backgroundColor: "#4f96a7",
