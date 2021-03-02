@@ -63,7 +63,7 @@ export default class SearchMain extends Component {
         shadowColor: "#000",shadowOffset: { width: 0,height: 2},shadowOpacity: 0.7, shadowRadius: 4}}>
         <View style = {{flex : 6}}>
            <Image source = {{uri : `http://115.85.183.157:3000${item.img}`}}
-          style = {{marginTop:2,marginHorizontal:1, flex:1, width : null,
+          style = {{borderTopLeftRadius:8,borderTopRightRadius:8, marginTop:2,marginHorizontal:1, flex:1, width : null,
             height:null, resizeMode: 'cover'}}/> 
         </View>
         <View style = {styles.clubHeader}/>
@@ -95,9 +95,9 @@ export default class SearchMain extends Component {
     render(){
     
         return (
-          <SafeAreaView style = {{ flex : 1, backgroundColor : "#aaced7"}}>
+          <SafeAreaView style = {{ flex : 1, backgroundColor : "#ebf4f67"}}>
             <View style={{ flex: 1, backgroundColor : "white"}}>
-              <View style = {{ height : this.starHeaderHeight, backgroundColor : '#aaced7',
+              <View style = {{ height : this.starHeaderHeight, backgroundColor : '#ebf4f6',
               borderBottomWidth : 1, borderBottomColor : '#dddddd'}}>
                 <View style = {{flexDirection: 'row', padding:10,backgroundColor: 'white', marginHorizontal:20, 
                                 shadowOffset : { width : 0, height : 0}, shadowColor: 'black', shadowOpacity: 0.2,elevation : 1, marginTop: Platform.OS == 'android' ? 30 : null}}>
@@ -112,7 +112,7 @@ export default class SearchMain extends Component {
                     backgroundColor : 'white'}}/>
                 </View>
               </View>
-              <ScrollView scrollEventThrottle = {16} style = {{backgroundColor:"#aaced7"}}>
+              <ScrollView scrollEventThrottle = {16} style = {{backgroundColor:"#ebf4f6"}}>
               <View style = {{paddingTop : 10}}>
                 <View style = {{flexDirection : 'row'}}>
               <Text style = {styles.headerText}>체육</Text>
@@ -122,7 +122,7 @@ export default class SearchMain extends Component {
               </View>
               <View style = {[styles.header,{borderBottomColor : "#8B0000"}]}/>
                 
-                <View style = {{flex:1, backgroundColor:'#aaced7', paddingTop : 10}}>
+                <View style = {{flex:1, backgroundColor:'#ebf4f6', paddingTop : 10}}>
     
                   <View style = {{height : 140, marginTop: 7}}>
                   <FlatList 
@@ -142,7 +142,7 @@ export default class SearchMain extends Component {
               <Text style = {styles.headerText}>연행예술</Text>
               <View style = {[styles.header,{borderBottomColor : "#FF8C00"}]}/>
                 
-                <View style = {{flex:1, backgroundColor:'#aaced7', paddingTop : 10}}>
+                <View style = {{flex:1, backgroundColor:'#ebf4f6', paddingTop : 10}}>
     
                   <View style = {{height : 140, marginTop: 7}}>
                   <FlatList 
@@ -163,7 +163,7 @@ export default class SearchMain extends Component {
               <Text style = {styles.headerText}>사회활동</Text>
               <View style = {[styles.header,{borderBottomColor : "#FFD700"}]}/>
                 
-                <View style = {{flex:1, backgroundColor:'#aaced7', paddingTop : 10}}>
+                <View style = {{flex:1, backgroundColor:'#ebf4f6', paddingTop : 10}}>
     
                   <View style = {{height : 140, marginTop: 7}}>
                   <FlatList 
@@ -181,7 +181,7 @@ export default class SearchMain extends Component {
                 <Text style = {styles.headerText}>레저스포츠</Text>
                   <View style = {[styles.header,{borderBottomColor : "#008000"}]}/>
                 
-                <View style = {{flex:1, backgroundColor:'#aaced7', paddingTop : 10}}>
+                <View style = {{flex:1, backgroundColor:'#ebf4f6', paddingTop : 10}}>
     
                   <View style = {{height : 140, marginTop: 7}}>
                   <FlatList 
@@ -200,7 +200,7 @@ export default class SearchMain extends Component {
                 <Text style = {styles.headerText}>과학기술</Text>
                   <View style = {[styles.header,{borderBottomColor : "#00BFFF"}]}/>
                 
-                <View style = {{flex:1, backgroundColor:'#aaced7', paddingTop : 10}}>
+                <View style = {{flex:1, backgroundColor:'#ebf4f6', paddingTop : 10}}>
     
                   <View style = {{height : 140, marginTop: 7}}>
                   <FlatList 
@@ -219,7 +219,7 @@ export default class SearchMain extends Component {
                 <Text style = {styles.headerText}>학술언론</Text>
                   <View style = {[styles.header,{borderBottomColor : "#0000CD"}]}/>
                 
-                <View style = {{flex:1, backgroundColor:'#aaced7', paddingTop : 10}}>
+                <View style = {{flex:1, backgroundColor:'#ebf4f6', paddingTop : 10}}>
     
                   <View style = {{height : 140, marginTop: 7}}>
                   <FlatList 
@@ -238,7 +238,7 @@ export default class SearchMain extends Component {
                 <Text style = {styles.headerText}>창작전시</Text>
                   <View style = {[styles.header,{borderBottomColor : "#663399"}]}/>
                 
-                <View style = {{flex:1, backgroundColor:'#aaced7', paddingTop : 10}}>
+                <View style = {{flex:1, backgroundColor:'#ebf4f6', paddingTop : 10}}>
     
                   <View style = {{height : 140, marginTop: 7}}>
                   <FlatList 
@@ -257,7 +257,7 @@ export default class SearchMain extends Component {
                 <Text style = {styles.headerText}>종교</Text>
                   <View style = {[styles.header,{borderBottomColor : "#BC8F8F"}]}/>
                 
-                <View style = {{flex:1, backgroundColor:'#aaced7', paddingTop : 10}}>
+                <View style = {{flex:1, backgroundColor:'#ebf4f6', paddingTop : 10}}>
     
                   <View style = {{height : 140, marginTop: 7}}>
                   <FlatList 

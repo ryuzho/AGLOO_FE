@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Text, StyleSheet, View, Image, TouchableOpacity, Alert, Modal,Pressable} from 'react-native'
-import { Ionicons, AntDesign, Entypo,Foundation } from '@expo/vector-icons';
+import { Ionicons, AntDesign } from '@expo/vector-icons';
 
 export default class MyClubMain extends Component {
   constructor(props) {
@@ -79,30 +79,30 @@ export default class MyClubMain extends Component {
             </View>
           </View>
         </Modal>
-          <View style = {{flexDirection : "row"}}>
+          <View style = {{flexDirection : "row", backgroundColor : '#ebf4f6'}}>
             <View style={{marginTop : 40}}>
             <Image source={{ uri: `http://115.85.183.157:3000${this.state.img}` }} style={styles.image}/>
             </View>
             <View style={{marginTop : 43, justifyContent : 'space-between', marginLeft : 5}}>
               <View style = {{flexDirection : 'row', marginTop : 10}}>
-              <Foundation name = 'home' size = {20}/> 
+              <AntDesign name = 'tago' size = {20} style = {{color : "#3e3e3e"}}/> 
               <Text style = {{fontSize : 22, fontWeight : '700',marginLeft : 7}}>{this.state.sort}</Text>
               </View>
               <View style = {{flexDirection : 'row'}}>
-              <Ionicons name = 'ios-location' size = {15} style = {{paddingTop : 3}}/> 
-              <Text style = {{fontSize : 18, fontWeight : '600',marginLeft : 7}}>{this.state.locate}</Text>
+              <Ionicons name = 'ios-location-outline' size = {15} style = {{paddingTop : 3}}/> 
+              <Text style = {{fontSize : 15, fontWeight : '600',marginLeft : 7,color : "#3e3e3e"}}>{this.state.locate}</Text>
               </View>
               <View style = {{flexDirection : 'row'}}>
-              <AntDesign name = 'clockcircle' size = {15} style = {{paddingTop : 2}}/> 
-              <Text style = {{fontWeight : '600',marginLeft : 7}}>{this.state.time}</Text>
+              <AntDesign name = 'clockcircleo' size = {15} style = {{paddingTop : 2}}/> 
+              <Text style = {{fontSize : 15,fontWeight : '600',marginLeft : 7,color : "#3e3e3e"}}>{this.state.time}</Text>
               </View>
               <View style = {{flexDirection : 'row'}}>
-              <Entypo name = 'phone' size = {15} style = {{paddingTop : 2.5}}/>
-              <Text style = {{fontSize : 15, fontWeight : '600',marginLeft : 7}}>{this.state.phone}</Text>
+              <AntDesign name = 'phone' size = {15} style = {{paddingTop : 2.5}}/>
+              <Text style = {{fontSize : 15, fontWeight : '600',marginLeft : 7,color : "#3e3e3e"}}>{this.state.phone}</Text>
               </View>
               <View style = {{flexDirection : 'row'}}>
-              <Entypo name = 'instagram' size = {15} style = {{paddingTop : 5}}/>
-              <Text style = {{fontSize : 18, fontWeight : '600',marginLeft : 7,marginBottom : 5}}>{this.state.insta}</Text>
+              <AntDesign name = 'instagram' size = {15} style = {{paddingTop : 5}}/>
+              <Text style = {{fontSize : 18, fontWeight : '600',marginLeft : 7,marginBottom : 5,color : "#3e3e3e"}}>{this.state.insta}</Text>
               </View>
             </View>
             </View>
@@ -154,7 +154,7 @@ const styles = StyleSheet.create({
     container: {
       flex: 1,
       flexDirection: "column",
-      backgroundColor: "#aaced7"
+      backgroundColor: '#ebf4f6'
       
     },
     image: {
@@ -171,7 +171,7 @@ const styles = StyleSheet.create({
       fontSize: 40,
       fontWeight: "600",
       textAlign: "center",
-      backgroundColor: "#4f96a7",
+      backgroundColor: "#aecbd3",
       
     },
     button:{

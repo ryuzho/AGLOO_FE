@@ -87,9 +87,9 @@ export default class MainScreen extends Component{
           },
         })}
         tabBarOptions={{
-          style:{backgroundColor : '#76b0be'},
-          activeTintColor: '#3A445D',
-          inactiveTintColor: 'white',
+          style:{backgroundColor : '#ebf4f6'},
+          activeTintColor: '#3f7886',
+          inactiveTintColor: '#32606b',
         }}
         
       >
