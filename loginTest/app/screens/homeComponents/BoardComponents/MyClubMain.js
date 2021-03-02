@@ -79,7 +79,7 @@ export default class MyClubMain extends Component {
         </Modal>
           <View style = {{flexDirection : "row"}}>
             <View style={{marginTop : 33}}>
-            <Image source={{ uri: this.props.club_img }} style={styles.image}/>
+            <Image source={{ uri: `http://115.85.183.157:3000${this.props.club_img}` }} style={styles.image}/>
             </View>
             <View style={{marginTop : 33, justifyContent : 'space-between', marginLeft : 5}}>
               <View style = {{flexDirection : 'row', marginTop : 10}}>

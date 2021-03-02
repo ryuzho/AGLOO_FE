@@ -116,7 +116,7 @@ export default class HomeMain extends Component {
                 {`${this.state.userID}님의 동아리`}
               </Text>
 
-              <View style = {{height : 280, marginTop: 20,shadowColor: "#000",shadowOffset: { width: 0,height: 2},shadowOpacity: 0.7, shadowRadius: 4}}>                       
+              <View style = {{height : 280, marginTop: 20, shadowColor: "#000",shadowOffset: { width: 0,height: 2},shadowOpacity: 0.7, shadowRadius: 4}}>                       
               <FlatList 
                 data={data} 
                 keyExtractor={item => item.club_id.toString()} 
@@ -124,7 +124,7 @@ export default class HomeMain extends Component {
                 showsHorizontalScrollIndicator={false}
                 renderItem={({item})=>
                 <TouchableOpacity onPress={()=>this.props.navigation.navigate("MyClub",{id : item.club_id, img:item.img})}>
-                 <Category imageUri = {{uri : item.img}}
+                 <Category imageUri = {{uri : `http://115.85.183.157:3000${item.img}`}}
                 name = {item.club_name}
                 /> 
                 </TouchableOpacity>

@@ -51,10 +51,10 @@ export default class SearchMain extends Component {
       if(item.depart == depart)
       return(
         <TouchableOpacity onPress={()=>this.props.navigation.navigate("MyClub",{id : item.club_id,img:item.img})}>
-         <View style = {{borderRadius:8, backgroundColor:colors[depart-1], height:200, width:120, marginLeft : 20, borderWidth:2, borderColor: colors[depart-1],
+         <View style = {{borderRadius:8, backgroundColor:colors[depart-1], height:120, width:100, marginLeft : 20, borderWidth:2, borderColor: colors[depart-1],
         shadowColor: "#000",shadowOffset: { width: 0,height: 2},shadowOpacity: 0.7, shadowRadius: 4}}>
         <View style = {{flex : 6}}>
-           <Image source = {{uri : item.img}}
+           <Image source = {{uri : `http://115.85.183.157:3000${item.img}`}}
           style = {{marginTop:2,marginHorizontal:1, flex:1, width : null,
             height:null, resizeMode: 'cover'}}/> 
         </View>
@@ -98,7 +98,7 @@ export default class SearchMain extends Component {
                 
                 <View style = {{flex:1, backgroundColor:'#aaced7', paddingTop : 10}}>
     
-                  <View style = {{height : 220, marginTop: 7}}>
+                  <View style = {{height : 140, marginTop: 7}}>
                   <FlatList 
                     data={this.state.club_data} 
                     keyExtractor={item => item.club_id.toString()} 
@@ -118,7 +118,7 @@ export default class SearchMain extends Component {
                 
                 <View style = {{flex:1, backgroundColor:'#aaced7', paddingTop : 10}}>
     
-                  <View style = {{height : 220, marginTop: 7}}>
+                  <View style = {{height : 140, marginTop: 7}}>
                   <FlatList 
                     data={this.state.club_data} 
                     keyExtractor={item => item.club_id.toString()} 
@@ -139,7 +139,7 @@ export default class SearchMain extends Component {
                 
                 <View style = {{flex:1, backgroundColor:'#aaced7', paddingTop : 10}}>
     
-                  <View style = {{height : 220, marginTop: 7}}>
+                  <View style = {{height : 140, marginTop: 7}}>
                   <FlatList 
                     data={this.state.club_data} 
                     keyExtractor={item => item.club_id.toString()} 
@@ -157,7 +157,7 @@ export default class SearchMain extends Component {
                 
                 <View style = {{flex:1, backgroundColor:'#aaced7', paddingTop : 10}}>
     
-                  <View style = {{height : 220, marginTop: 7}}>
+                  <View style = {{height : 140, marginTop: 7}}>
                   <FlatList 
                     data={this.state.club_data} 
                     keyExtractor={item => item.club_id.toString()} 
@@ -176,7 +176,7 @@ export default class SearchMain extends Component {
                 
                 <View style = {{flex:1, backgroundColor:'#aaced7', paddingTop : 10}}>
     
-                  <View style = {{height : 220, marginTop: 7}}>
+                  <View style = {{height : 140, marginTop: 7}}>
                   <FlatList 
                     data={this.state.club_data} 
                     keyExtractor={item => item.club_id.toString()} 
@@ -195,7 +195,7 @@ export default class SearchMain extends Component {
                 
                 <View style = {{flex:1, backgroundColor:'#aaced7', paddingTop : 10}}>
     
-                  <View style = {{height : 220, marginTop: 7}}>
+                  <View style = {{height : 140, marginTop: 7}}>
                   <FlatList 
                     data={this.state.club_data} 
                     keyExtractor={item => item.club_id.toString()} 
@@ -214,7 +214,7 @@ export default class SearchMain extends Component {
                 
                 <View style = {{flex:1, backgroundColor:'#aaced7', paddingTop : 10}}>
     
-                  <View style = {{height : 220, marginTop: 7}}>
+                  <View style = {{height : 140, marginTop: 7}}>
                   <FlatList 
                     data={this.state.club_data} 
                     keyExtractor={item => item.club_id.toString()} 
@@ -233,7 +233,7 @@ export default class SearchMain extends Component {
                 
                 <View style = {{flex:1, backgroundColor:'#aaced7', paddingTop : 10}}>
     
-                  <View style = {{height : 220, marginTop: 7}}>
+                  <View style = {{height : 140, marginTop: 7}}>
                   <FlatList 
                     data={this.state.club_data} 
                     keyExtractor={item => item.club_id.toString()} 
