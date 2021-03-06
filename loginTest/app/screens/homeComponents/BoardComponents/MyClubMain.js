@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
 import { Text, StyleSheet, View, Image, TouchableOpacity, Alert, Modal,Pressable} from 'react-native'
 import { Ionicons, AntDesign } from '@expo/vector-icons';
+import AsyncStorage from '@react-native-community/async-storage';
 
 export default class MyClubMain extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      my_token : '',
+      userID : '',
       club_name : '',
       sort : '',
       locate : '',
@@ -15,12 +18,47 @@ export default class MyClubMain extends Component {
       intro : '',
       img : '',
       isLoading : true,
-      modalVisible: false
+      modalVisible: false,
+      member : false,
+      joinText : "가입신청"
     }
   }
+  
 
-    componentDidMount(){
+    async componentDidMount(){
+      
       const club_id = this.props.club_id;
+
+      await AsyncStorage.getItem('user_token').then((value) => {
+        if(value){
+            this.setState({my_token:JSON.parse(value).token})
+        }
+      });
+    
+        fetch('http://115.85.183.157:3000/auth',{
+                method:'POST',
+                headers:{
+                     'Accept' : 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    token :this.state.my_token
+                }),
+            })
+            .then((response) => response.json())
+             .then((response)=>{
+                 if(response.success){
+            this.setState({userID:response.id})
+                 }
+           else{
+            this.props.navigation.navigate("Login");
+            AsyncStorage.clear()
+           }
+             })
+             .catch((error)=>{
+          //alert("tokenError")
+             });
+      
 
       fetch(`http://115.85.183.157:3000/club/${club_id}`,{
       method:'GET',
@@ -51,6 +89,31 @@ export default class MyClubMain extends Component {
       this.setState({ modalVisible: visible });
     }
   
+    joinClub(){
+      fetch('http://115.85.183.157:3000/join',{
+                method:'POST',
+                headers:{
+                     'Accept' : 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    club_id : this.props.club_id,
+                    id : this.state.userID
+                }),
+            })
+            .then((response) => response.json())
+             .then((response)=>{
+            
+            Alert.alert("가입을 축하드립니다!")
+            this.setState({member : true})
+            this.setState({joinText : "회원탈퇴"})
+            
+             })
+             .catch((error)=>{
+          //alert("tokenError")
+             });
+            
+    }
     
     render() {
       const { modalVisible } = this.state;
@@ -110,8 +173,8 @@ export default class MyClubMain extends Component {
             <Text style={styles.text}>{this.state.club_name}</Text>
             </View>
             <View style = {{flexDirection : 'row', marginTop : 10, justifyContent:'space-evenly'}}>
-              <TouchableOpacity style = {styles.button}>
-                <Text style = {styles.buttonText}>가입신청</Text>
+              <TouchableOpacity style = {styles.button} onPress = {()=>this.joinClub()}>
+                <Text style = {styles.buttonText}>{this.state.joinText}</Text>
               </TouchableOpacity>
               <TouchableOpacity style = {styles.button} onPress = {()=>this.setModalVisible(true)}>
                 <Text style = {styles.buttonText}>동아리소개</Text>

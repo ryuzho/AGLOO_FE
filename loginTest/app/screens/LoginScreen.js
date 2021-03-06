@@ -2,8 +2,6 @@ import React, {Component} from 'react';
 import { NavigationContainer } from '@react-navigation/native'
 import { StyleSheet, Text, TextInput, View, TouchableOpacity, KeyboardAvoidingView, Keyboard, ImageBackground } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
-
-
 export default class login extends Component {
 
   constructor(props){
@@ -46,7 +44,7 @@ export default class login extends Component {
 		 .then((response)=>{
 			 if(response.success){
          AsyncStorage.setItem('user_token',JSON.stringify({token : response.token}))
-				 this.props.navigation.navigate("main");
+				 this.props.navigation.replace("main");
 			 }else{
 				alert(response.msg);
 			 }

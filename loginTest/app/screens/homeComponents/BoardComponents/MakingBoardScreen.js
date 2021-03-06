@@ -23,12 +23,12 @@ export default class Write extends Component {
     }
     takeImage = async () => {
 		// make sure that we have the permission
-		const hasPermission = await this.askForPermission
+		const hasPermission = await this.askForPermission()
 		if (!hasPermission) {
 			return
 		} else {
 			// launch the camera with the following settings
-			let image = await ImagePicker.launchCameraAsync({
+			let image = await ImagePicker.launchImageLibraryAsync({
 				mediaTypes: ImagePicker.MediaTypeOptions.Images,
 				allowsEditing: true,
 				aspect: [3, 3],
@@ -121,7 +121,7 @@ export default class Write extends Component {
                     </TouchableOpacity>
                     <TouchableOpacity
                     style = {styles.button}
-                    onPress = {this.takeImage}
+                    onPress = {()=>this.takeImage()}
                     >
                         <Text style = {styles.buttonText}>🔗  사진</Text>
                     </TouchableOpacity>

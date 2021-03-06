@@ -116,8 +116,8 @@ export default class SearchMain extends Component {
               <View style = {{paddingTop : 10}}>
                 <View style = {{flexDirection : 'row'}}>
               <Text style = {styles.headerText}>체육</Text>
-              <TouchableOpacity style = {{marginRight : 25, marginTop : 5}} onPress={()=>this.props.navigation.navigate("addNewClub")}>
-                <AntDesign name = 'plussquareo' size = {27} color = '#8B0000'/>
+              <TouchableOpacity style = {{marginRight : 25, marginTop : 5}} onPress={()=>this.props.navigation.replace("addNewClub")}>
+                <AntDesign name = 'plussquareo' size = {27} color = '#3f7886'/>
               </TouchableOpacity>
               </View>
               <View style = {[styles.header,{borderBottomColor : "#8B0000"}]}/>
