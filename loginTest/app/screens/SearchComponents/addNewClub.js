@@ -4,6 +4,8 @@ import { TextInput } from 'react-native-gesture-handler';
 import DropDownPicker from 'react-native-dropdown-picker';
 import {Ionicons} from '@expo/vector-icons'
 import AsyncStorage from '@react-native-community/async-storage';
+import * as ImagePicker from 'expo-image-picker'
+import * as Permissions from 'expo-permissions'
 
 export default class addNewClub extends Component {
     constructor(props) {
@@ -107,6 +109,39 @@ export default class addNewClub extends Component {
             console.error(error);
             });
         }
+
+    askForPermission = async () => {
+        const permissionResult = 
+        await Permissions.askAsync(Permissions.CAMERA)
+        if(permissionResult.status !== 'granted'){
+            Alert.alert('no permissions to access camera!',
+            [{text:'ok'}])
+            return false
+        }
+        return true
+        }
+
+    addImg = async () => {
+		// make sure that we have the permission
+		const hasPermission = await this.askForPermission()
+		if (!hasPermission) {
+			return
+		} else {
+			// launch the camera with the following settings
+			let image = await ImagePicker.launchImageLibraryAsync({
+				mediaTypes: ImagePicker.MediaTypeOptions.Images,
+				allowsEditing: true,
+				aspect: [3, 3],
+				quality: 1,
+				base64: true,
+                
+			})
+            this.state.image.push(image.base64)
+            alert(image)
+			return image
+		}
+        
+    }
           
 
     
@@ -129,7 +164,8 @@ export default class addNewClub extends Component {
                <ScrollView showsVerticalScrollIndicator={false}>
                     <View style = {{justifyContent : 'center', alignItems : 'center', marginTop : 20}}>
                     <TouchableOpacity
-                        style = {{width : 100, height : 100, borderWidth : 3, borderColor : '#aaced7', borderRadius : 20, alignItems : 'center', justifyContent : 'center'}}>
+                        style = {{width : 100, height : 100, borderWidth : 3, borderColor : '#aaced7', borderRadius : 20, alignItems : 'center', justifyContent : 'center'}}
+                        onPress = {()=>this.addImg()}>
                         <Ionicons name = 'add' size = {80} color = '#aaced7' style = {{paddingLeft : 6}}/>
                         <Text style = {{ fontWeight : '700', fontSize : 12, color : '#aaced7', marginTop : -10 }}>사진 추가</Text>
                    </TouchableOpacity>
