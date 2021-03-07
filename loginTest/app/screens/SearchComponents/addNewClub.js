@@ -23,7 +23,7 @@ export default class addNewClub extends Component {
         this.state = {
             my_token: "",
             userID: "",
-            img: "https://i.imgur.com/Mss2HGx.png",
+            img: null,
             club_name: null,
             depart: "1",
             sort: null,
@@ -103,24 +103,33 @@ export default class addNewClub extends Component {
     }
 
     saveClub() {
+        const data = new FormData();
+        let localUri = this.state.img.uri;
+        let filename = localUri.split("/").pop();
+        let match = /\.(\w+)$/.exec(filename);
+        let type = match ? `image/${match[1]}` : `image`;
+
+        data.append("img", {
+            uri: localUri,
+            name: filename,
+            type,
+        });
+        data.append("club_name", this.state.club_name);
+        data.append("depart", this.state.club_name);
+        data.append("sort", this.state.sort);
+        data.append("locate", this.state.locate);
+        data.append("time", this.state.time);
+        data.append("phone", this.state.phone);
+        data.append("insta", this.state.insta);
+        data.append("intro", this.state.intro);
+        data.append("memo", this.state.memo);
+
         fetch("http://115.85.183.157:3000/club", {
             method: "POST",
+            body: data,
             headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
+                "content-type": "multipart/form-data",
             },
-            body: JSON.stringify({
-                img: this.state.img,
-                club_name: this.state.club_name,
-                depart: this.state.depart,
-                sort: this.state.sort,
-                locate: this.state.locate,
-                time: this.state.time,
-                phone: this.state.phone,
-                insta: this.state.insta,
-                intro: this.state.intro,
-                memo: this.state.memo,
-            }),
         })
             .then((response) => response.json())
             .then((response) => {
@@ -165,7 +174,9 @@ export default class addNewClub extends Component {
         });
 
         if (!result.cancelled) {
-            this.setState({ img: result.uri });
+            this.setState({ img: result });
+            //alert(result.fileName);
+            //alert(result.type);
         }
     };
 
@@ -238,23 +249,22 @@ export default class addNewClub extends Component {
                                         <TouchableOpacity
                                             onPress={this.pickImage}
                                         >
-                                            {this.state.img && (
-                                                <Image
-                                                    source={{
-                                                        uri: this.state.img,
-                                                    }}
-                                                    style={{
-                                                        width: 100,
-                                                        height: 100,
-                                                        borderColor: "#aaced7",
-                                                        borderWidth: 3,
-                                                        borderRadius: 20,
-                                                        alignItems: "center",
-                                                        justifyContent:
-                                                            "center",
-                                                    }}
-                                                />
-                                            )}
+                                            <Image
+                                                source={{
+                                                    uri: this.state.img
+                                                        ? this.state.img.uri
+                                                        : "https://i.imgur.com/Mss2HGx.png",
+                                                }}
+                                                style={{
+                                                    width: 100,
+                                                    height: 100,
+                                                    borderColor: "#aaced7",
+                                                    borderWidth: 3,
+                                                    borderRadius: 20,
+                                                    alignItems: "center",
+                                                    justifyContent: "center",
+                                                }}
+                                            />
                                         </TouchableOpacity>
                                     </View>
                                 </View>
