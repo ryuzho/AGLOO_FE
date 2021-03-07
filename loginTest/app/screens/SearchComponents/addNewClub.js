@@ -115,7 +115,7 @@ export default class addNewClub extends Component {
             type,
         });
         data.append("club_name", this.state.club_name);
-        data.append("depart", this.state.club_name);
+        data.append("depart", this.state.depart);
         data.append("sort", this.state.sort);
         data.append("locate", this.state.locate);
         data.append("time", this.state.time);
