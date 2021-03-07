@@ -67,6 +67,7 @@ export default class MainScreen extends Component{
 
     return (
         <Tab.Navigator
+        
         screenOptions={({ route }) => ({
           tabBarIcon: ({ focused, color, size }) => {
             let iconName;
