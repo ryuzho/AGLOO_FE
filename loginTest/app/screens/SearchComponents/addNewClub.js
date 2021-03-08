@@ -175,8 +175,6 @@ export default class addNewClub extends Component {
 
         if (!result.cancelled) {
             this.setState({ img: result });
-            //alert(result.fileName);
-            //alert(result.type);
         }
     };
 
