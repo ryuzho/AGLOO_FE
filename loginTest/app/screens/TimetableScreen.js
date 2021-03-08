@@ -60,7 +60,7 @@ export default class TimetableScreen extends Component {
     fetch(`http://115.85.183.157:3000/time?id=${this.props.userID}`, {
       method: "GET",
       headers: {
-        Accept: "application/json",
+        "Accept": "application/json",
         "Content-Type": "application/json",
       },
     })
@@ -518,7 +518,7 @@ export default class TimetableScreen extends Component {
       fetch("http://115.85.183.157:3000/time", {
         method: "POST",
         headers: {
-          //'Accept' : 'application/json',
+          'Accept' : 'application/json',
           "Content-Type": "application/json",
         },
         body: JSON.stringify({

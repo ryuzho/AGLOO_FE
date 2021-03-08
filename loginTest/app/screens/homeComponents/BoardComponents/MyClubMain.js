@@ -364,7 +364,7 @@ export default class MyClubMain extends Component {
           </View>
         </View>
         <View style={{ justifyContent: "center", alignItems: "center" }}>
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity style={styles.button} onPress = {()=>this.props.navigation.navigate("clubtablescreen")}>
             <Text style={styles.buttonText}>공강시간표</Text>
           </TouchableOpacity>
         </View>

@@ -5,6 +5,8 @@ import BoardScreen from './BoardComponents/BoardScreen';
 import MakingBoardScreen from './BoardComponents/MakingBoardScreen';
 import ContentScreen from './BoardComponents/ContentScreen';
 import FixContentScreen from './BoardComponents/FixContentScreen';
+import ClubTableScreen from './BoardComponents/ClubTableScreen';
+import MembersTableScreen from './BoardComponents/MembersTableScreen';
 
 
 
@@ -24,7 +26,12 @@ export default function MyClub({route}) {
         <ClubStack.Screen name = "makingboard" component={MakingBoardScreen}/>
         <ClubStack.Screen name = "contentscreen" component={ContentScreen}/>
         <ClubStack.Screen name ="fixcontentscreen" component={FixContentScreen}/>
-        
+        <ClubStack.Screen name ="clubtablescreen">
+          {(props)=> <ClubTableScreen {...props} club_id = {club_id}/>}
+        </ClubStack.Screen>
+        <ClubStack.Screen name ="Memberstablescreen">
+          {(props)=> <MembersTableScreen {...props} club_id = {club_id}/>}
+        </ClubStack.Screen>
       </ClubStack.Navigator>
   );
 }
