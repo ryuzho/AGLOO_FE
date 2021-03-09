@@ -3,6 +3,6 @@
 ## Front-End
   react-native
   
-https://user-images.githubusercontent.com/77534983/110494105-9c929000-8136-11eb-8549-163e39bdd2ae.mp4
-
+#주요기능
+*sign in & sign up
 
