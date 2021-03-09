@@ -5,5 +5,5 @@
   
 # 주요기능
 * sign in & sign up
-![agloo_login_register](https://user-images.githubusercontent.com/77534983/110496386-c482f300-8138-11eb-97a7-48c1c0875698.gif)
+![agloo_login_register](https://user-images.githubusercontent.com/77534983/110496386-c482f300-8138-11eb-97a7-48c1c0875698.gif){: width = "200" height="100"
 
