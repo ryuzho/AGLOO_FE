@@ -3,6 +3,6 @@
 ## Front-End
   react-native
   
-#주요기능
-*sign in & sign up
+# 주요기능
+* sign in & sign up
 
