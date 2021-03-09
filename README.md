@@ -1,2 +1,2 @@
-# ProjectTest
-동아리앱 test입니다.
+# AGLOO
+2021.01 ~ 2021.03 동아리 App 제작 프로젝트
