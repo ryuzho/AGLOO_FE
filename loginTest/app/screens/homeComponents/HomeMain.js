@@ -29,6 +29,7 @@ export default class HomeMain extends Component {
     this.state = {
       my_token: "",
       userID: "",
+      user_name : "",
       data: [],
     };
   }
@@ -54,6 +55,7 @@ export default class HomeMain extends Component {
       .then((response) => {
         if (response.success) {
           this.setState({ userID: response.id });
+          this.setState({user_name : response.name})
         } else {
           this.props.navigation.navigate("Login");
           AsyncStorage.clear();
@@ -129,9 +131,10 @@ export default class HomeMain extends Component {
                   fontSize: 24,
                   fontWeight: "700",
                   paddingHorizontal: 20,
+                  color : '#fff'
                 }}
               >
-                {`${this.state.userID}님의 동아리`}
+                {`${this.state.user_name}님의 동아리`}
               </Text>
 
               <View
