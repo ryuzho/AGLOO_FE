@@ -104,16 +104,16 @@ export default class addNewClub extends Component {
 
     saveClub() {
         const data = new FormData();
+        if(this.state.img != null){
         let localUri = this.state.img.uri;
         let filename = localUri.split("/").pop();
         let match = /\.(\w+)$/.exec(filename);
         let type = match ? `image/${match[1]}` : `image`;
-
         data.append("img", {
             uri: localUri,
             name: filename,
             type,
-        });
+        });}
         data.append("club_name", this.state.club_name);
         data.append("depart", this.state.depart);
         data.append("sort", this.state.sort);

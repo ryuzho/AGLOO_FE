@@ -92,7 +92,7 @@ export default class login extends Component {
                             onChangeText={(userId) => this.setState({ userId })}
                         />
                         <TextInput
-                            secureTextEntry={true}
+                            secureTextEntry={false}
                             style={styles.input}
                             placeholder="PASSWORD"
                             onChangeText={(userPassword) =>

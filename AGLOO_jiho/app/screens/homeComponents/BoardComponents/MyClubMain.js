@@ -193,7 +193,7 @@ export default class MyClubMain extends Component {
 
   render() {
     const { modalVisible } = this.state;
-    const adminText = ["동아리폐쇄", "회원탈퇴", "가입신청"];
+    const adminText = ["동아리 폐쇄", "회원탈퇴", "가입신청"];
     return (
       <View style={styles.container}>
         <Modal
@@ -364,7 +364,7 @@ export default class MyClubMain extends Component {
           </View>
         </View>
         <View style={{ justifyContent: "center", alignItems: "center" }}>
-          <TouchableOpacity style={styles.button} onPress = {()=>this.props.navigation.navigate("clubtablescreen")}>
+          <TouchableOpacity style={styles.button_table} onPress = {()=>this.props.navigation.navigate("clubtablescreen")}>
             <Text style={styles.buttonText}>공강시간표</Text>
           </TouchableOpacity>
         </View>
@@ -396,20 +396,31 @@ const styles = StyleSheet.create({
     backgroundColor: "#aecbd3",
   },
   button: {
-    opacity: 0.7,
     borderColor: "#3A445D",
-    backgroundColor: "#3A445D",
+    borderWidth : 2,
+    backgroundColor: "#fff",
     borderRadius: 6,
     justifyContent: "center",
     alignItems: "center",
     width: "40%",
-    height: 50,
-    marginTop: 10,
+    height: 70,
+    marginTop: 15,
+  },
+  button_table: {
+    borderColor: "#3A445D",
+    borderWidth : 2,
+    backgroundColor: "#fff",
+    borderRadius: 6,
+    justifyContent: "center",
+    alignItems: "center",
+    width: "85%",
+    height: 70,
+    marginTop: 18,
   },
   buttonText: {
     fontWeight: "700",
     fontSize: 14,
-    color: "white",
+    color: "#3A445D",
   },
   centeredView: {
     flex: 1,

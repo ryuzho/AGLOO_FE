@@ -100,7 +100,7 @@ export default class register extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#76B0BE',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -108,32 +108,37 @@ const styles = StyleSheet.create({
     width: '100%',
     alignItems: "center"
   },
-  input:{
-    borderWidth: 1,
-    borderColor: "#24A6D9",
+  input: {
+    borderWidth: 2,
+    borderColor: "#3A445D",
+    backgroundColor: "white",
+    opacity: 0.9,
     borderRadius: 6,
-    width: '70%',
+    width: "70%",
     height: 50,
     marginTop: 8,
     paddingHorizontal: 20,
-    fontSize: 18
-  },
+    fontSize: 18,
+},
   buttonArea:{
     width : '100%',
     alignItems :"center"
   },
-  button:{
+  button: {
+    opacity: 0.9,
     borderWidth: 2,
-    backgroundColor: "#004ba0",
+    borderColor: "#3A445D",
+    backgroundColor: "#3A445D",
     borderRadius: 6,
     justifyContent: "center",
     alignItems: "center",
-    width: '70%',
+    width: "70%",
     height: 50,
-    marginTop: 8
-  },
-  buttonText: {
-    fontSize : 20,
-    color : "white"
-  }
+    marginTop: 8,
+},
+buttonText: {
+    fontWeight: "700",
+    fontSize: 17,
+    color: "white",
+},
 });

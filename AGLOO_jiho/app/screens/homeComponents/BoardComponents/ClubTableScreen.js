@@ -8,6 +8,7 @@ export default class ClubTableScreen extends Component {
         super(props);
         this.state = {
             list : [],
+            name_list : [],
             data : [],
             tableData: [
                 [null, null, null, null, null],
@@ -65,7 +66,7 @@ export default class ClubTableScreen extends Component {
             [response.f0, response.f1, response.f2, response.f3, response.f4],
             [response.g0, response.g1, response.g2, response.g3, response.g4],
           ];
-        this.props.navigation.navigate('Memberstablescreen',{tableData:this.state.tableData})
+        this.props.navigation.navigate('Memberstablescreen',{tableData:this.state.tableData,name_list:this.state.name_list})
         
       })
       .catch((error) => {
@@ -78,11 +79,14 @@ export default class ClubTableScreen extends Component {
         item.isSelect = !item.isSelect
         if(!this.state.list.includes(item.id)){
         this.state.list.push(item.id)
+        this.state.name_list.push(item.name)
         }
         else{
             this.state.list = this.state.list.filter((Element)=>Element !== item.id)
+            this.state.name_list = this.state.name_list.filter((Element)=>Element !== item.name)
         }
         this.setState({item:item})
+        
     }
 
 
