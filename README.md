@@ -1,3 +1,4 @@
+![ezgif com-gif-maker_add(1)](https://user-images.githubusercontent.com/77534983/110783293-94a82c80-82ab-11eb-816f-c012a81c2da1.gif)
 # AGLOO
 __2021.01 ~ 2021.03 동아리 App 제작 프로젝트__
 ## Front-End
@@ -27,11 +28,14 @@ __동아리 생성__
 ______<img src="https://user-images.githubusercontent.com/77534983/110782158-23b44500-82aa-11eb-9313-9a74732e9347.gif" width="300" height="600" />
    
 __동아리 가입 & 탈퇴__
+<img src="https://user-images.githubusercontent.com/77534983/110783368-b43f5500-82ab-11eb-8e33-63180df9fd18.gif" />
+______<img src="https://user-images.githubusercontent.com/77534983/110783474-d76a0480-82ab-11eb-837e-1d7d4d0acec0.gif" />
 
 - - -
 __시간표 등록 & 수정__   
 <img src="https://user-images.githubusercontent.com/77534983/110782749-df757480-82aa-11eb-91e4-3af66a74a5b5.gif" width="300" height="600" />
 ______<img src="https://user-images.githubusercontent.com/77534983/110782848-f916bc00-82aa-11eb-83ad-bb1ad1c819ea.gif" width="300" height="600" />
+
 
 
 
