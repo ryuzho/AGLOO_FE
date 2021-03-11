@@ -5,7 +5,7 @@ import Constants from 'expo-constants'
 import * as ImagePicker from 'expo-image-picker'
 import { ScrollView } from "react-native-gesture-handler";
 
-export default class Write extends Component {
+export default class NoticeFixContentScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -17,7 +17,7 @@ export default class Write extends Component {
       }
       componentDidMount () {
         const {idx} = this.props.route.params
-        return fetch('http://115.85.183.157:3000/post/free_board/'+idx,{method: 'GET'})//get http://facebook.github.io/react-native/movies.json
+        return fetch('http://115.85.183.157:3000/post/notice_board/'+idx,{method: 'GET'})
         .then((response) => response.json())
         .then((response) => {
           this.setState({
@@ -54,7 +54,7 @@ export default class Write extends Component {
             this.setState({alarm:'내용을 입력하세요'})
         }
         else{
-        fetch('http://115.85.183.157:3000/post/free_board/'+idx,{
+        fetch('http://115.85.183.157:3000/post/notice_board/'+idx,{
             method: 'PATCH',
             headers:{
                 'Accept' : 'application/json',
@@ -68,7 +68,7 @@ export default class Write extends Component {
         .then((response) => response.json())
         .then((response)=>{
             if(response.success){
-                this.props.navigation.navigate("BoardScreen");
+                this.props.navigation.navigate("NoticeBoardScreen");
             }else{
                 alert(response.msg);
             }

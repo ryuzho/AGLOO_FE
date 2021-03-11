@@ -5,7 +5,7 @@ import Constants from 'expo-constants'
 import { RefreshControlComponent } from 'react-native';
 
 
-export default class BoardScreen extends Component {
+export default class NoticeBoardScreen extends Component {
 
   constructor(props) {
     super(props);
@@ -17,7 +17,7 @@ export default class BoardScreen extends Component {
   }
 
   componentDidMount () {
-    return fetch('http://115.85.183.157:3000/list/1/free_board',{method: 'GET'})//get 
+    return fetch('http://115.85.183.157:3000/list/1/notice_board',{method: 'GET'})//get 
     .then((response) => response.json())
     .then((response) => {
       this.setState({
@@ -39,11 +39,11 @@ export default class BoardScreen extends Component {
         {
           text: "예",
           onPress: () =>{
-            fetch('http://115.85.183.157:3000/post/free_board/'+idx,{
+            fetch('http://115.85.183.157:3000/post/notice_board/'+idx,{
               method:'DELETE',
             }).then((response) => response.json()).then((response) => {
               if(response.success){
-                fetch('http://115.85.183.157:3000/list/1/free_board',{method: 'GET'})
+                fetch('http://115.85.183.157:3000/list/1/notice_board',{method: 'GET'})
                 .then((response) => response.json())
                 .then((response) => {
                   this.setState({
@@ -73,7 +73,7 @@ export default class BoardScreen extends Component {
   }
   handleRefresh = (() => {
     this.setState({refreshing: true})
-    fetch('http://115.85.183.157:3000/list/1/free_board',{method: 'GET'})//get 
+    fetch('http://115.85.183.157:3000/list/1/notice_board',{method: 'GET'})//get 
     .then((response) => response.json())
     .then((response) => {
       this.setState({
@@ -100,6 +100,7 @@ export default class BoardScreen extends Component {
     if(now.getFullYear() > datee.getFullYear()){
         minus= now.getFullYear()-datee.getFullYear();
   
+        console.log(minus+"년 전");
         return (minus+"년 전")
     }else if(now.getMonth() > datee.getMonth()){
   
@@ -136,7 +137,7 @@ export default class BoardScreen extends Component {
       const {member} = this.props.route.params
       const renderlist = ({item}) => (
       <View style = {styles.item}> 
-        <TouchableOpacity style = {{width:'90%'}} onPress = {()=>this.props.navigation.navigate("contentscreen",{idx:item.idx,user_id:user_id,member:member})}>
+        <TouchableOpacity style = {{width:'90%'}} onPress = {()=>this.props.navigation.navigate("NoticeContentScreen",{idx:item.idx,user_id:user_id,member:member})}>
           <Text style={styles.writes}>{item.title}</Text>
           <View style={{flexDirection:'row'}}>
           <Text style={{}}>작성자: {item.writer}</Text>
@@ -151,7 +152,7 @@ export default class BoardScreen extends Component {
       <Text style={{color:'white',fontSize:18,fontWeight: 'bold'}}>삭제</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.button}
-      onPress = {()=>this.props.navigation.navigate("fixcontentscreen",{idx:item.idx})}
+      onPress = {()=>this.props.navigation.navigate("NoticeFixContentScreen",{idx:item.idx})}
       >
       <Text style={{color:'white',fontSize:18,fontWeight: 'bold'}}>수정</Text>
       </TouchableOpacity>
@@ -177,15 +178,15 @@ export default class BoardScreen extends Component {
           keyExtractor = {(item,index) => index.toString()} 
           ListHeaderComponent= {() => (
             <View style={{paddingTop: Constants.statusBarHeight}}>
-              <Text style={styles.firstsquare}>자 유 게 시 판</Text>
+              <Text style={styles.firstsquare}>공 지 사 항</Text>
               <View style={styles.settingg}>
-              <TouchableOpacity onPress = {()=>this.props.navigation.navigate("makingboard",{user_id:user_id})}>
+              {(member == 'admin') && <TouchableOpacity onPress = {()=>this.props.navigation.navigate("MakeNoticeScreen",{user_id:user_id})}>
           <Text style={styles.buttonText}>📝 작성</Text>
-          </TouchableOpacity>
+          </TouchableOpacity>}
               </View>
             </View>
             )}
-            // stickyHeaderIndices = {[0]}
+            stickyHeaderIndices = {[0]}
             refreshing = {this.state.refreshing}
             onRefresh = {this.handleRefresh}
           />

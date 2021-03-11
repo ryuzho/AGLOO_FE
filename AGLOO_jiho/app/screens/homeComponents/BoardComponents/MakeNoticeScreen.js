@@ -1,34 +1,25 @@
 import React,{Component} from "react";
-import {View,Text,Image,TextInput,Keyboard,FlatList,StyleSheet,Button,TouchableOpacity} from "react-native";
+import {View,Image,Text,TextInput,Keyboard,StyleSheet,Button,TouchableOpacity,FlatList} from "react-native";
 import axios from "axios";
 import Constants from 'expo-constants'
 import * as ImagePicker from 'expo-image-picker'
+import * as Permissions from 'expo-permissions'
 import { ScrollView } from "react-native-gesture-handler";
 
-export default class Write extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-          dataSource: '',
-          title: '',
-          content: '',
-          setSelected: []
-        }
-      }
-      componentDidMount () {
-        const {idx} = this.props.route.params
-        return fetch('http://115.85.183.157:3000/post/free_board/'+idx,{method: 'GET'})//get http://facebook.github.io/react-native/movies.json
-        .then((response) => response.json())
-        .then((response) => {
-          this.setState({
-            dataSource: response, //list 형태
-          })
-        })
-        .catch((error) => {
-          console.log(error)
-        });
-      }
-      openImage = async() => {
+
+export default class MakeNoticeScreen extends Component {
+    constructor(props){
+		super(props)
+
+		this.state={
+		title: '',
+        content: '',
+        image: [], 
+        setSelected: []
+		}
+	}
+    
+    openImage = async() => {
         let permission = await ImagePicker.requestCameraPermissionsAsync();
 
         if(permission.granted === false){
@@ -44,31 +35,35 @@ export default class Write extends Component {
         this.setState({setSelected: setSelected.concat(picker.uri)})
         console.log(picker)
     }
+    
+    postBoard = () => {
+        const{title,content} = this.state;
+        const user_id = this.props.route.params.user_id
 
-    updateBoard = () => {
-      const {idx} = this.props.route.params
-        if(this.state.title == ''){
+        if(title == ''){
             this.setState({alarm:'제목을 입력하세요'})
         }
-        else if(this.state.content == ""){
+        else if(content == ""){
             this.setState({alarm:'내용을 입력하세요'})
         }
         else{
-        fetch('http://115.85.183.157:3000/post/free_board/'+idx,{
-            method: 'PATCH',
+        fetch('http://115.85.183.157:3000/post/1/notice_board',{
+            method: 'POST',
             headers:{
                 'Accept' : 'application/json',
                 'Content-Type' : 'application/json'
             },
             body:JSON.stringify({
+                id: user_id,
                 title : this.state.title,
-                content: this.state.content
+                content: this.state.content,
             }),
         })
         .then((response) => response.json())
         .then((response)=>{
             if(response.success){
-                this.props.navigation.navigate("BoardScreen");
+                this.props.navigation.navigate("NoticeBoardScreen");
+        
             }else{
                 alert(response.msg);
             }
@@ -81,19 +76,22 @@ export default class Write extends Component {
     };
 
     render() {
-      const renderImage = ({item}) => (
-        <View>
-            <Image source = {{uri:item}} style = {styles.image}></Image>
-        </View>
-    )
+        const renderImage = ({item}) => (
+            <View>
+                <Image source = {{uri:item}} style = {styles.image}></Image>
+            </View>
+        )
         return(
-          <View style={{flex: 1, backgroundColor:"#ebf4f6"}}>
+            <View style={{flex: 1, backgroundColor:"#ebf4f6"}}>
             <ScrollView>
                 <View style={styles.setting}>
-                    <Text style={styles.topp}>게시글 수정</Text>
+                    <Text 
+                    style={styles.topp}>
+                        공지사항 작성</Text>
                 <View>
                     <Text style={{color:'red',alignSelf: 'center'}}>{this.state.alarm}</Text>
                 </View>
+                <View style={styles.writingform}>
                 {
                         this.state.setSelected.length ?
                         (<FlatList data={this.state.setSelected} horizontal = {true} 
@@ -101,20 +99,22 @@ export default class Write extends Component {
         
                         ) : <Text>사진을 추가하세요!!</Text>
                     }
-                <View style={styles.writingform}>
-                    <TextInput style={styles.input} defaultValue={this.state.dataSource.title}
+                    <TextInput style={styles.input} 
+                    placeholder = "제목" 
                     onChangeText={title => this.setState({title})}/>
-                    <TextInput style={styles.contentinput} defaultValue={this.state.dataSource.content}
+                    <TextInput style={styles.contentinput} 
+                    placeholder = {"\n * 부적절한 용어 사용시 이용 제한 ! *" }
                     multiline = {true} 
                     blurOnSubmit={true}
-                    onChangeText={content => this.setState({content})}/>
+                    onChangeText={content => this.setState({content})}
+                    />
                 </View>
                 <View style={styles.buttonarea}>
                     <TouchableOpacity
                     style = {styles.button}
-                    onPress = {this.updateBoard}
+                    onPress = {this.postBoard}
                     >
-                        <Text style = {styles.buttonText}>🖍  수정</Text>
+                        <Text style = {styles.buttonText}>🖍  작성</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
                     style = {styles.button}
@@ -136,15 +136,15 @@ const styles = StyleSheet.create({
       paddingTop: Constants.statusBarHeight
     },
     topp: {
-      fontSize: 25, 
-      borderWidth:2,
-      borderColor:'#76b0be', 
-      backgroundColor:'#76b0be', 
-      width:"100%",
-      textAlign: 'center',
-      color: 'white',
-      fontWeight: "bold",
-  },
+        fontSize: 25, 
+        borderWidth:2,
+        borderColor:'#76b0be', 
+        backgroundColor:'#76b0be', 
+        width:"100%",
+        textAlign: 'center',
+        color: 'white',
+        fontWeight: "bold",
+    },
     writingform: {
         width: '100%',
         alignItems: "center"
@@ -181,19 +181,18 @@ const styles = StyleSheet.create({
         width: "100%"
       },
       buttonarea:{
-        width : '20%',
+        width : '30%',
         alignItems :"center",
         justifyContent: "center",
         flexDirection: "row"
       },
       buttonText: {
         fontSize : 20,
-        color:'white',
-        textAlign:'center'
+        color: 'white'
       },
       image: {
-        width:150,
-        height: 150,
-        resizeMode: 'contain'
-    }
+          width:150,
+          height: 150,
+          resizeMode: 'contain'
+      }
   });

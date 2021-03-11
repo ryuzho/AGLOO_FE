@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {View,ImageBackground,Alert,Text,Modal,Pressable,StyleSheet,ScrollView,TouchableOpacity,SafeAreaView,FlatList,ActivityIndicator} from "react-native";
 import axios from 'axios';
 import Constants from 'expo-constants'
-
+// import StickyHeaderFooterScrollView from 'react-native-sticky-header-footer-scroll-view';
 import { TextInput } from 'react-native-gesture-handler';
 
 export default class ContentScreen extends Component {
@@ -12,14 +12,12 @@ export default class ContentScreen extends Component {
           dataSource: '',
           inputcomment: '',
           ccomment: '',
-          modalVisible: false,
-          patchidx: ''
         }
       }
 
       componentDidMount () {
         const {idx} = this.props.route.params || ''
-        return (fetch('http://115.85.183.157:3000/post/free_board/'+idx,{method: 'GET'})
+        return (fetch('http://115.85.183.157:3000/post/notice_board/'+idx,{method: 'GET'})
         .then((response) => response.json())
         .then((response) => {
           this.setState({
@@ -164,72 +162,13 @@ export default class ContentScreen extends Component {
         );
       }
     
-      setModalVisible = (visible,idx) => {
-        this.setState({ modalVisible: visible ,patchidx: idx});
-      }
 
     render(){
       const {user_id} = this.props.route.params
       const {member} = this.props.route.params
-      const { modalVisible } = this.state;
-      const rendercomment = ({item}) => (
-        <View>
-          <View style = {styles.item}> 
-            <Text style={{fontWeight:'bold',fontSize:18}}>{item.id}: </Text>
-            <Text style={{fontSize:18}}>{item.comment}</Text>
-            {((member == 'admin') || (item.id == user_id)) &&  <View style={{flex:1,alignItems:"flex-end" ,justifyContent:"flex-end"}}>
-        <View style={{justifyContent:'space-around' ,flexDirection:'row'}}>
-              <TouchableOpacity style={styles.bbutton}
-      onPress = {()=>this.deleteComments(item.idx)}
-      >
-      <Text style={{color:'white',fontSize:18,fontWeight: 'bold'}}>삭제</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.bbutton}
-      onPress = {()=>this.setModalVisible(true,item.idx)}
-      >
-      <Text style={{color:'white',fontSize:18,fontWeight: 'bold'}}>수정</Text>
-      </TouchableOpacity>
-      </View>
-      </View>}
-      </View>
-      {item.updated === item.created ? (<Text style={{borderBottomWidth : 1,
-      borderBottomColor : "#a7b4c9"}}>생성: {item.created}</Text>) : 
-      (<Text style={{borderBottomWidth : 1,
-        borderBottomColor : "#a7b4c9"}}>수정: {item.updated}</Text>)}
-      </View>
-    )
+
         return (
           <View style={{flex: 1, backgroundColor:"#ebf4f6"}}>
-          <Modal
-          animationType="slide"
-          transparent={true}
-          visible={modalVisible}
-          onRequestClose={() => {
-            Alert.alert("Modal has been closed.");
-            this.setModalVisible(!modalVisible);
-          }}
-        >
-          <View style={styles.centeredView}>
-            <View style={styles.modalView}>
-              <TextInput style={styles.input} placeholder = "수정하기" 
-              onChangeText={inputcomment => this.setState({inputcomment})}/>
-              
-              <View style={{flexDirection:'row',marginTop: 20}}>
-              <TouchableOpacity style={styles.bbbutton}
-      onPress = {()=>this.updateComment(this.state.patchidx)}
-      >
-      <Text style={{color:'white',fontSize:18,fontWeight: 'bold'}}>수정</Text>
-      </TouchableOpacity>
-      <Text>  </Text>
-      <TouchableOpacity style={styles.bbbutton}
-      onPress = {()=>this.setModalVisible(!modalVisible)}
-      >
-      <Text style={{color:'white',fontSize:18,fontWeight: 'bold'}}>취소</Text>
-      </TouchableOpacity>
-              </View>
-            </View>
-          </View>
-        </Modal>
             <View style={styles.setting}>
             <ImageBackground source={require('../../../../assets/pp.png')} style={styles.background}/>
             <Text style={styles.htitle}>{this.state.dataSource.title}</Text>
@@ -243,28 +182,6 @@ export default class ContentScreen extends Component {
         </View>
         </View>
         <Text style={styles.hcontent}>{this.state.dataSource.content}</Text>
-        <View style={{flexDirection:'row',alignItems:'center',justifyContent:'center',marginBottom:5}}>
-                            <TextInput style={styles.input} placeholder = "댓글" 
-                            
-                            onChangeText={inputcomment => this.setState({inputcomment})}/>
-                           <TouchableOpacity style = {styles.button} onPress = {()=>{this.postcontent()}}>
-                       <Text style={styles.buttonText}>작성</Text>
-                       </TouchableOpacity>
-                       </View>
-        {
-                        this.state.ccomment.length !== 0 ?
-                        (
-                        <FlatList data={this.state.ccomment}
-                            renderItem = {rendercomment} keyExtractor = {(item,index) => index.toString()}
-
-                        />
-
-                        ) : (
-                          <View>
-                       <Text style={{fontSize:20,textAlign:'center'}}>댓글이 없습니다</Text>
-                        </View>)
-                    }
- 
         </View>
         )
 }

@@ -29,12 +29,12 @@ export default class MyClubMain extends Component {
       isLoading: true,
       modalVisible: false,
       adminIndex: 2,
+      member:"",
     };
   }
 
   async componentDidMount() {
     const club_id = this.props.club_id;
-
     await AsyncStorage.getItem("user_token").then((value) => {
       if (value) {
         this.setState({ my_token: JSON.parse(value).token });
@@ -84,6 +84,7 @@ export default class MyClubMain extends Component {
         } else if (response.member == false) {
           this.setState({ adminIndex: 2 });
         }
+        this.setState({member:response.member})
       })
       .catch((error) => Alert.alert("error"))
       .finally(() => {
@@ -192,6 +193,7 @@ export default class MyClubMain extends Component {
   }
 
   render() {
+
     const { modalVisible } = this.state;
     const adminText = ["동아리 폐쇄", "회원탈퇴", "가입신청"];
     return (
@@ -340,17 +342,26 @@ export default class MyClubMain extends Component {
           <View
             style={{ flexDirection: "row", justifyContent: "space-evenly" }}
           >
-            <TouchableOpacity style={styles.button}>
-              <Text style={styles.buttonText}>공지사항</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.button}
-              onPress={() => {
-                this.props.navigation.navigate("BoardScreen");
-              }}
-            >
-              <Text style={styles.buttonText}>자유게시판</Text>
-            </TouchableOpacity>
+            <TouchableOpacity style = {styles.button} onPress={()=>{
+                if(this.state.member == 'admin' || this.state.member == true){
+                this.props.navigation.navigate("NoticeBoardScreen",{user_id:this.state.userID ,member:this.state.member})
+              }
+              else{
+                Alert.alert('동아리 가입을 해야합니다.')
+              }
+              }}>
+                <Text style = {styles.buttonText}>공지사항</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style = {styles.button} onPress={()=>{
+                if(this.state.member == 'admin' || this.state.member == true){
+                this.props.navigation.navigate("BoardScreen",{user_id:this.state.userID ,member:this.state.member})
+              }
+              else{
+               Alert.alert('동아리 가입을 해야합니다.')
+              }
+              }}>
+                <Text style = {styles.buttonText}>자유게시판</Text>
+              </TouchableOpacity>
           </View>
           <View
             style={{ flexDirection: "row", justifyContent: "space-evenly" }}

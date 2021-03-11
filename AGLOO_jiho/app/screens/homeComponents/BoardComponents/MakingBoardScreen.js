@@ -1,49 +1,46 @@
 import React,{Component} from "react";
-import {View,Image,Text,TextInput,Keyboard,StyleSheet,Button,TouchableOpacity} from "react-native";
+import {View,Image,Text,TextInput,Keyboard,StyleSheet,Button,TouchableOpacity,FlatList} from "react-native";
 import axios from "axios";
 import Constants from 'expo-constants'
 import * as ImagePicker from 'expo-image-picker'
 import * as Permissions from 'expo-permissions'
+import { ScrollView } from "react-native-gesture-handler";
+
 
 export default class Write extends Component {
-    state = {
-        title: '',
+    constructor(props){
+		super(props)
+
+        // const [loading,setLoading] = useState(false);
+        // const [hasAllow, setHasAllow] = useState(false);
+		this.state={
+		title: '',
         content: '',
-        image: []
-    };
-    askForPermission = async () => {
-        const permissionResult = 
-        await Permissions.askAsync(Permissions.CAMERA)
-        if(permissionResult.status !== 'granted'){
-            Alert.alert('no permissions to access camera!',
-            [{text:'ok'}])
-            return false
-        }
-        return true
-    }
-    takeImage = async () => {
-		// make sure that we have the permission
-		const hasPermission = await this.askForPermission()
-		if (!hasPermission) {
-			return
-		} else {
-			// launch the camera with the following settings
-			let image = await ImagePicker.launchImageLibraryAsync({
-				mediaTypes: ImagePicker.MediaTypeOptions.Images,
-				allowsEditing: true,
-				aspect: [3, 3],
-				quality: 1,
-				base64: true,
-                
-			})
-            this.state.image.push(image.base64)
-			return image
+        image: [], //2,3개 이미지 들어갈 때 어떻게 할 것인지
+        setSelected: []
 		}
-        
 	}
+    
+    openImage = async() => {
+        let permission = await ImagePicker.requestCameraPermissionsAsync();
+
+        if(permission.granted === false){
+            return;
+        }
+        
+        let picker = await ImagePicker.launchImageLibraryAsync()
+        
+        if(picker.cancelled ===true){
+            return;
+        }
+        const {setSelected} = this.state
+        this.setState({setSelected: setSelected.concat(picker.uri)})
+        console.log(picker)
+    }
+    
     postBoard = () => {
         const{title,content} = this.state;
-
+        const {user_id} = this.props.route.params
         if(title == ''){
             this.setState({alarm:'제목을 입력하세요'})
         }
@@ -51,22 +48,22 @@ export default class Write extends Component {
             this.setState({alarm:'내용을 입력하세요'})
         }
         else{
-        fetch('',{
+        fetch('http://115.85.183.157:3000/post/1/free_board',{
             method: 'POST',
             headers:{
                 'Accept' : 'application/json',
                 'Content-Type' : 'application/json'
             },
             body:JSON.stringify({
+                id: user_id,
                 title : this.state.title,
                 content: this.state.content,
-                image: this.state.image
             }),
         })
         .then((response) => response.json())
         .then((response)=>{
             if(response.success){
-                this.props.navigation.navigate("ClubNoticeBoard");
+                this.props.navigation.navigate("BoardScreen");
             }else{
                 alert(response.msg);
             }
@@ -75,36 +72,36 @@ export default class Write extends Component {
             console.error(error);
         });
     }
-        // const post = await axios.post('',{
-        //     title,
-        //     content,
-        // });
         Keyboard.dismiss();
-        // this.setState({
-        //     title: '',
-        //     content: '',
-        // });
-        //console.log(post);
     };
-    // handleChange = (e) => {
-    //     const {name,value} = e.target;
-    //     this.setState({
-    //         [name]: value,
-    //     });
-    // };
+
     render() {
-        
+        const renderImage = ({item}) => (
+            <View>
+                <Image source = {{uri:item}} style = {styles.image}></Image>
+            </View>
+        )
         return(
+            <View style={{flex: 1, backgroundColor:"#ebf4f6"}}>
+            <ScrollView>
                 <View style={styles.setting}>
-                    <Text style={{fontSize: 25, marginTop: 10,marginBottom:5,borderBottomWidth:2,width:"100%",textAlign: 'center'}}>게시글 작성</Text>
+                    <Text 
+                    style={styles.topp}>
+                        게시글 작성</Text>
                 <View>
                     <Text style={{color:'red',alignSelf: 'center'}}>{this.state.alarm}</Text>
                 </View>
                 <View style={styles.writingform}>
+                {
+                        this.state.setSelected.length ?
+                        (<FlatList data={this.state.setSelected} horizontal = {true} 
+                            renderItem = {renderImage} keyExtractor = {(item,index) => index.toString()} />
+        
+                        ) : <Text>사진을 추가하세요!!</Text>
+                    }
                     <TextInput style={styles.input} 
                     placeholder = "제목" 
                     onChangeText={title => this.setState({title})}/>
-
                     <TextInput style={styles.contentinput} 
                     placeholder = {"\n * 부적절한 용어 사용시 이용 제한 ! *" }
                     multiline = {true} 
@@ -121,11 +118,13 @@ export default class Write extends Component {
                     </TouchableOpacity>
                     <TouchableOpacity
                     style = {styles.button}
-                    onPress = {()=>this.takeImage()}
+                    onPress = {this.openImage}
                     >
                         <Text style = {styles.buttonText}>🔗  사진</Text>
                     </TouchableOpacity>
                 </View>
+                </View>
+                </ScrollView>
                 </View>
         );
     }
@@ -135,6 +134,16 @@ const styles = StyleSheet.create({
     setting: {
       alignItems :"center",
       paddingTop: Constants.statusBarHeight
+    },
+    topp: {
+        fontSize: 25, 
+        borderWidth:2,
+        borderColor:'#76b0be', 
+        backgroundColor:'#76b0be', 
+        width:"100%",
+        textAlign: 'center',
+        color: 'white',
+        fontWeight: "bold",
     },
     writingform: {
         width: '100%',
@@ -163,19 +172,28 @@ const styles = StyleSheet.create({
       },
       button:{
         borderWidth: 2,
-        borderRadius: 6,
+        borderColor : "#3A445D",
+        backgroundColor: "#3A445D",
+        opacity:0.7,
         justifyContent: "center",
         alignItems: "center",
         marginTop: 10,
         width: "100%"
       },
       buttonarea:{
-        width : '20%',
+        width : '30%',
+        height : '20%',
         alignItems :"center",
         justifyContent: "center",
         flexDirection: "row"
       },
       buttonText: {
         fontSize : 20,
+        color: 'white'
+      },
+      image: {
+          width:150,
+          height: 150,
+          resizeMode: 'contain'
       }
   });
