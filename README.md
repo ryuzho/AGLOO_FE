@@ -16,9 +16,19 @@ __HOME -> 내가 가입한 동아리__
 <img src="https://user-images.githubusercontent.com/77534983/110771603-07121000-829e-11eb-99a6-128c7f0d0034.gif" width="300" height="600" />
 
 - - -
-__Search -> 분과 별 동아리 리스트 & 동아리 찾기__   
+__SEARCH -> 분과 별 동아리 리스트 & 동아리 찾기__   
 <img src="https://user-images.githubusercontent.com/77534983/110780653-447b9b00-82a8-11eb-840d-ec6a883d17b2.gif" width="300" height="600" />
 ______<img src="https://user-images.githubusercontent.com/77534983/110781331-206c8980-82a9-11eb-845a-f1d9689924ea.gif" width="300" height="600" />
+
+
+- - -
+__동아리 생성__
+<img src="https://user-images.githubusercontent.com/77534983/110781887-c7e9bc00-82a9-11eb-88f7-a0cb007f7cd1.gif" width="300" height="600" />
+<img src="https://user-images.githubusercontent.com/77534983/110782158-23b44500-82aa-11eb-9313-9a74732e9347.gif" width="300" height="600" />
+   
+__동아리 가입, 탈퇴__
+
+
 
 
 
