@@ -1,7 +1,7 @@
 # AGLOO
 __2021.01 ~ 2021.03 동아리 App 제작 프로젝트__
 ## Front-End
-- [x] __react-native__
+- [x] __react-native__<span style="color:red">red</span>
 - [x] __javascript__
 - [x] __Expo CLI__ for testing ios(iphone)
 - [x] __Android Studio__ AVD for testing Android 
