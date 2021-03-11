@@ -18,7 +18,7 @@ __2021.01 ~ 2021.03 동아리 App 제작 프로젝트__
 - - -
 ### __SEARCH -> 분과 별 동아리 리스트 & 동아리 찾기__   
 <img src="https://user-images.githubusercontent.com/77534983/110780653-447b9b00-82a8-11eb-840d-ec6a883d17b2.gif" width="300" height="600" />
-______<img src="https://user-images.githubusercontent.com/77534983/110781331-206c8980-82a9-11eb-845a-f1d9689924ea.gif" width="300" height="600" />
+____<img src="https://user-images.githubusercontent.com/77534983/110781331-206c8980-82a9-11eb-845a-f1d9689924ea.gif" width="300" height="600" />
 
 
 - - -
