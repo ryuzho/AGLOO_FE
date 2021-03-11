@@ -22,7 +22,7 @@ ______<img src="https://user-images.githubusercontent.com/77534983/110781331-206
 
 
 - - -
-__동아리 생성__
+__동아리 생성__   
 <img src="https://user-images.githubusercontent.com/77534983/110781887-c7e9bc00-82a9-11eb-88f7-a0cb007f7cd1.gif" width="300" height="600" />
 <img src="https://user-images.githubusercontent.com/77534983/110782158-23b44500-82aa-11eb-9313-9a74732e9347.gif" width="300" height="600" />
    
