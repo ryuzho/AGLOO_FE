@@ -37,7 +37,10 @@ ______<img src="https://user-images.githubusercontent.com/77534983/110782848-f91
 
 - - -
 __공강시간표__
-* AGLOO 의 핵심기능입니다. 가입한 동아리에서 내가 원하는 사람들과 나의 공통 공강시간표를 얻을 수 있습니다.
+AGLOO 의 핵심기능입니다. 가입한 동아리에서 내가 원하는 사람들과 나의 공통 공강시간표를 얻을 수 있습니다.   
+<img src="https://user-images.githubusercontent.com/77534983/110784180-b6ee7a00-82ac-11eb-8142-d77eaa9165a8.gif" width="300" height="600" />
+
+
 
 
 
