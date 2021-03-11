@@ -1,5 +1,5 @@
-__# AGLOO__
-2021.01 ~ 2021.03 동아리 App 제작 프로젝트
+# AGLOO
+__2021.01 ~ 2021.03 동아리 App 제작 프로젝트__
 ## Front-End
     react-native
   
