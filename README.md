@@ -2,9 +2,10 @@
 __2021.01 ~ 2021.03 동아리 App 제작 프로젝트__
 ## Front-End
 - [x] __react-native__
+    * 안드로이드
 - [x] __javascript__
 - [x] __Expo CLI__ for testing ios(iphone)
-- [x] __Android Studio__ AVD for testing Android 
+- [x] __Android Studio AVD__ for testing Android 
   
 ## 핵심기능
 
