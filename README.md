@@ -26,7 +26,14 @@ __동아리 생성__
 <img src="https://user-images.githubusercontent.com/77534983/110781887-c7e9bc00-82a9-11eb-88f7-a0cb007f7cd1.gif" width="300" height="600" />
 ______<img src="https://user-images.githubusercontent.com/77534983/110782158-23b44500-82aa-11eb-9313-9a74732e9347.gif" width="300" height="600" />
    
-__동아리 가입, 탈퇴__
+__동아리 가입 & 탈퇴__
+
+- - -
+__시간표 등록 & 수정__
+<img src="https://user-images.githubusercontent.com/77534983/110782749-df757480-82aa-11eb-91e4-3af66a74a5b5.gif" width="300" height="600" />
+<img src="https://user-images.githubusercontent.com/77534983/110782848-f916bc00-82aa-11eb-83ad-bb1ad1c819ea.gif" width="300" height="600" />
+
+
 
 
 
