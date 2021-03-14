@@ -4,7 +4,7 @@ __2021.01 ~ 2021.03 동아리 App 제작 프로젝트__
 - [x] __react-native__   
   - Android 와 iOS 에서 동기개발 가능   
   - javascript 기반 모바일 애플리케이션 프레임워크   
-  - 풍부한 리소스, 빠른개발속도
+  - 풍부한 리소스, 빠른개발속도   
 - [x] __Expo CLI__ for testing ios(iphone)
 - [x] __Android Studio AVD__ for testing Android
 
