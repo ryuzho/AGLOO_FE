@@ -12,7 +12,11 @@ javascript 기반 모바일 애플리케이션 프레임워크
   * react-native navigation v5
 
         - Stack-navigator :  stack 형식으로 screen을 쌓으며 screen 이동
-        - Tab-navigator : HOME, SEARCH, TIMETABLE, SETTING screen으로 이동하는 Bottom-Tab 생성
+        - Tab-navigator : HOME, SEARCH, TIMETABLE, SETTING screen으로 이동하는 Bottom-Tab 생성   
+  * react-native-table-component
+
+        - TimeTable screen 의 시간표를 만들기 위해 
+        
   
 ## 주요기능
 
